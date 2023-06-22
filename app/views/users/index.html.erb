@@ -1,0 +1,27 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+<ul class="users">
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phân Quyền</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <% if user.customer? && !user.deleted?%>
+          <tr><%= render user %></tr>
+        <% end %>
+      <% end %> 
+    </tbody>
+
+
+   
+    
+  </table>
+</ul>

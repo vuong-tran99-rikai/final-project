@@ -1,0 +1,141 @@
+<div class="container">
+  <% if @cart.empty? %>
+    <h5 class="text-center">Giỏ hàng đang rỗng</h5>
+  <% else %>
+    <div id="cart-table">
+      <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Thành tiền</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart.each_with_index do |item, index| %>
+            <% book = Book.find(item["book_id"]) %>
+            <% max_quantity = book.quantity %>
+            <% item_quantity = item['quantity'].to_i %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= link_to image_tag(book.image, class: 'img_book_home ' , alt: book.name_book), detail_path(book), data: { turbolinks: false } %></td>
+              <td class="text-center" ><%= book.name_book %></td>
+              <td class="text-center">
+                <div style="display: flex; justify-content: space-around; align-items:center">
+                  <div class="btn_plus">
+                    <%= button_to "-", reduce_quantity_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
+                  </div>
+                  <div>
+                    <%= item['quantity'] %>
+                  </div>
+                  <div class="btn_minus">
+                    <% if item_quantity < max_quantity %>
+                      <%= button_to "+", add_quantity_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
+                    <% else %>
+                      <span class="error-message">Số lượng đã đạt tối đa</span>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <div>
+                  <div class="price_info">
+                    <div class="price_discount"><%= book.display_price[:discount] %> ₫</div>
+                  </div>
+                  <div class="price_info">
+                    <div class="price_current"><%= book.display_price[:current] %></div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center"><%= book.display_price[:discount] * item['quantity'] %> ₫</td>
+              <td class="text-center">
+                <%= link_to remove_item_path(book_id: book.id), class: 'btn btn-sm btn-danger' do %>
+                  <div class="bi bi-trash">X</div>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="text-right">
+        <div class="total-price"><strong>Tạm tính giỏ hàng: <%= calculate_total_current(@cart) %> ₫</strong></div>
+        <div class="total-price"><strong>Tiết kiệm được: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
+        <div class="total-price"><strong>Thành tiền: <%= calculate_total(@cart) %> ₫</strong></div>
+        <div class="btn_pay">
+          <%= button_to "Thanh toán",
+            new_invoice_path,
+            method: :get,
+            class: "btn btn-danger",
+            remote: true
+          %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .container {
+    margin-top: 24px;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  td {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .price_info div{
+    font-size: 14px;
+  }
+
+  .img_book_home {
+    max-width: 40px;
+    height: auto;
+  }
+
+  .btn-secondary {
+    background-color: #ccc;
+    color: #000;
+    padding: 0 10px;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    margin-top: 20px;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  .btn-sm {
+    font-size: 10px;
+  }
+
+  .price_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  .btn_pay {
+    display: flex;
+    justify-content: end;
+    margin-top: 12px;
+  }
+</style>
+

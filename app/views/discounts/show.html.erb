@@ -1,0 +1,49 @@
+<% provide(:title, 'List discounts') %>
+<h1>List discounts</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <%# <th>STT</th> %>
+      <th>Name KM</th>
+      <th>Giá KM</th>
+      <th>Start day</th>
+      <th>End day</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th></th>
+      <!-- Các cột khác (nếu có) -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @discounts.each do |discount| %>
+      <tr>
+        <td><%= discount.name_KM %></td>
+        <td><%= discount.gia_KM %> % </td>
+        <td><%= discount.start_day %></td>
+        <td><%= discount.end_day %></td>
+        <td style = "text-align:center ">
+          <%=discount.status.to_s.humanize %>
+        </td>
+        <td style="padding: 4px;">
+          <div style="display: flex;">
+            <%= button_to "Delete",discount_destroy_path(discount.id), method: :get, class: 'btn btn-danger', remote: true%>
+            <%= button_to "Edit", discount_edit_path(discount),method: :get, class: "btn btn-warning" %>
+          </div>
+        </td>
+        <td style="padding: 4px;">
+          <%= button_to "Xem chi tiết", discount_detail_seen_path(discount.id),method: :get, class: 'btn btn-info' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+  .button_to{
+    flex: 1;
+    margin: 4px;
+  }
+  .button_to input {
+    font-size: 15px;
+  }
+</style>

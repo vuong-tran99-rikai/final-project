@@ -1,0 +1,55 @@
+<nav id="sidebar">
+  <div class="p-4 pt-5">
+    <a href="#" class="img logo rounded-circle mb-4" style="background-image: url('http://localhost:3000/assets/logo-c6ee3ba15691907e601e62d496673318f966e49f85d30ae66f039520b10afc29.jpg');"></a>
+    <ul class="list-unstyled components mb-5">
+      <% if logged? %>
+        <% if admin_user? %>
+          <li><%= link_to "Dashboards", revenue_path, style: (get_path.include?("revenue")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li>
+            <%= link_to "Categories", "#categoriesSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("categor")) ? "color: #f8b739;" : "#FFFFFFCC" %>
+            <ul class="collapse list-unstyled" id="categoriesSubmenu">
+              <li><%= link_to "All", "/category", style: (get_path == '/category') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create", create_categories_path, style: (get_path == '/create-categories') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+            </ul>
+          </li>
+          <li><%= link_to "Rental History", rental_book_history_path, style: (get_path == '/rental-history') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Evaluater", evaluaters_path, style: (get_path == '/evaluaters') ? "color: #f8b739;" : "#FFFFFFCC"  %></li>
+          <li>
+            <%= link_to "Discounts", "#discountsSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("discount")) ? "color: #f8b739;" : "#FFFFFFCC" %>
+            <ul class="collapse list-unstyled" id="discountsSubmenu">
+              <li><%= link_to "All", '/discount', style: (get_path == '/discount') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create Book Discount", "/add-discount", style: (get_path == '/add-discount') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create Discount", create_discounts_path, style: (get_path == '/create-discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+            </ul>
+          </li>
+          <li><%= link_to "Users", users_path, style: (get_path.include?("users")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li>
+            <%= link_to "Books", "#booksSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("book")) ? "color: #f8b739;" : "#FFFFFFCC" %>
+            <ul class="collapse list-unstyled" id="booksSubmenu">
+              <li><%= link_to "All", books_path, style: (get_path == '/books') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create", "/create-book", style: (get_path == '/create-book') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Discount Book", book_discounts_path, style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+        <% end %>
+        <li><%= link_to "Setting", edit_user_path(current_user), style: (get_path.include?("user") && get_path.include?("edit")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+      <% else %>
+        <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<style>
+
+  #sidebar ul li a{
+    text-decoration: none;
+  }
+
+  #sidebar div{
+    position: fixed;
+    width: 300px  ;
+  }
+</style>

@@ -1,0 +1,30 @@
+<% provide(:title, 'List Category') %>
+<h1>Rental History</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <%# <th>STT</th> %>
+      <th>Name user</th>
+      <th>Phone</th>
+      <th>Adress</th>
+      <th>Expiry date</th>
+      <th>Status</th>
+      <th>Action</th>
+      <!-- Các cột khác (nếu có) -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @history.each do |history| %>
+      <tr>
+        <td><%= history.name %></td>
+        <td><%= history.phone %></td>
+        <td><%= history.address %></td>
+        <td><%= history.expiry_date %></td>
+        <td style="padding: 6px;">
+          <%= button_to history.status.to_s.humanize, toggle_status_history_path(history.id), method: :get, class: 'btn btn-warning', remote: true %>
+        </td>
+        <td style="padding: 6px;"><%= button_to "Xem chi tiết", history_detail_path(history.id),method: :get, class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

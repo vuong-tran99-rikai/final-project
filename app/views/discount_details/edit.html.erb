@@ -1,0 +1,63 @@
+<% provide(:title, 'List discounts') %>
+<h1>List Book Discount</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <%# <th>STT</th> %>
+      <th>Name Sách</th>
+      <th>Action</th>
+    
+      <!-- Các cột khác (nếu có) -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |name_book| %>
+      <tr>
+        <td><%= name_book.name_book %></td>
+        <td>
+          <%= link_to "delete", discount_detail_destroy_path(book_id: name_book.id), class: 'toggle-status-button btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h1>Add discounts</h1>
+<div class="row" style="justify-content: center; color: black;" >
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with url: discount_detail_path(@discounts), method: :patch do |f| %>
+      <%= f.label :name_book %>
+      <div class="input-group" style="width: 100%">
+        <select class="custom-select" id="inputGroupSelect02" multiple name="discount_detail[book_id][]">
+          <% @bookEdit.each do |book| %>
+            <option value="<%= book.id %>"><%= book.name_book %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" id="selectedOptions" readonly style="margin: 12px 0 12px 0;">
+      <%= f.submit "Update Discounts", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  label {
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var selectElement = document.getElementById("inputGroupSelect02");
+    var selectedOptionsElement = document.getElementById("selectedOptions");
+    
+    selectElement.addEventListener("change", function() {
+      var selectedOptions = Array.from(selectElement.selectedOptions).map(function(option) {
+        return option.textContent;
+      });
+      
+      selectedOptionsElement.value = selectedOptions.join(", ");
+    });
+  });
+</script>
+

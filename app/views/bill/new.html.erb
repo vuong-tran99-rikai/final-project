@@ -1,0 +1,33 @@
+<%= form_for(@bill) do |f| %>
+  <div>
+    <%= render 'shared/error_messages', object: f.object %>
+  </div>
+  <%= f.label 'Địa chỉ giao hàng:', class: 'title_pay' %>
+  <%= f.label 'Họ tên người nhận:' %>
+  <%= f.text_field :name, class: 'form-control', value: current_user.name, readonly: true %>
+  <%= f.label 'Số điện thoại:' %>
+  <%= f.telephone_field :phone, class: 'form-control' %>
+  <%= f.label 'Địa chỉ:' %>
+  <%= f.email_field :address, class: 'form-control' %>
+  <div class="text-right">
+    <h5 class="total-price"><strong>Khuyến mãi: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></h5>
+    <h5 class="total-price"><strong>Tổng tiền thuê: <%= calculate_total(@cart) %> ₫</strong></h5>
+  </div>
+  <%= f.hidden_field :total_discount, value: calculate_total_current(@cart) - calculate_total(@cart) %>
+  <%= f.hidden_field :total_price, value: calculate_total(@cart) %>
+  <%= f.submit 'Xác nhận thuê sách', class: "btn btn-danger" %>
+<% end %>
+
+<style>
+  .title_pay {
+    display: block;
+    font-size: 18px;
+    line-height: 32px;
+  }
+  label {
+    margin-bottom: 10px;
+  }
+  .form-control {
+    margin-bottom: 10px;
+  }
+</style>

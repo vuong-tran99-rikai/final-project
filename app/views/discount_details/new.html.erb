@@ -1,0 +1,50 @@
+<% provide(:title, 'Add discounts') %>
+<h1>Add discounts</h1>
+<div class="row" style="justify-content: center; color: black;">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@addDiscount, data: { turbo: false }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name_book , style: "font-weight: bold;"%>
+      <div class="input-group" style="width: 100%">
+        <select class="form-select" multiple aria-label="multiple select example" id="inputGroupSelect02" name="discount_detail[book_id][]" style="overflow-y: scroll; height: 100px;">
+          <% @books.each do |book| %>
+            <option value="<%= book.id %>"><%= book.name_book %></option>
+          <% end %>
+        </select>
+      </div>
+      <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" id="selectedOptions" readonly style="margin: 12px 0 12px 0;">
+      <%= f.label :name_discount, style: "font-weight: bold;" %>
+      <div class="input-group" style="width: 100%">
+        <select class="custom-select" id="inputGroupSelect02" name="discount_detail[discount_id]">
+          <% @discount.each do |discount| %>
+            <option value="<%= discount.id %>"><%= discount.name_KM %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <%= f.submit "Create Discounts", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .btn-primary {
+    margin: 8px 0 8px 0;
+  }
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var selectElement = document.getElementById("inputGroupSelect02");
+    var selectedOptionsElement = document.getElementById("selectedOptions");
+    
+    selectElement.addEventListener("change", function() {
+      var selectedOptions = Array.from(selectElement.selectedOptions).map(function(option) {
+        return option.textContent;
+      });
+      
+      selectedOptionsElement.value = selectedOptions.join(", ");
+    });
+  });
+</script>
