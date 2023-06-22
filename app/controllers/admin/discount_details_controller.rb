@@ -1,4 +1,4 @@
-class DiscountDetailsController < ApplicationController
+class Admin::DiscountDetailsController < ApplicationController
   before_action :admin_user, only: [:new, :create, :destroy, :edit ]
   def new
       @addDiscount = DiscountDetail.new
@@ -12,7 +12,7 @@ class DiscountDetailsController < ApplicationController
     conflicting_book_ids = []
   
     if selected_book_ids.blank?
-      flash[:danger] = 'Không có dữ liệu'
+      flash[:danger] = t('flash.error')
       redirect_to request.referrer
     else
       selected_book_ids.each do |book_id|
@@ -42,18 +42,18 @@ class DiscountDetailsController < ApplicationController
         flash[:error] = "Lỗi: Sách đã thuộc khuyến mãi khác trong khoảng thời gian cho sách: #{conflicting_book_names.join(', ')}"
         redirect_to request.referrer
       else
-        flash[:success] = 'Create thành công'
-        redirect_to '/add-discount'
+        flash[:success] = t('flash.create')
+        redirect_to request.referrer
       end
     end
   end
   
 
     def edit
-      @discounts = Discount.find(params[:id])
-      @books = @discounts.books.where(status: [0, 1])
+      @discount = Discount.find(params[:discount_id])
       # byebug
-      @discount_detail = @discounts.discount_detail
+      @books = DiscountDetail.where(discount_id: @discount.id).includes(:book)
+      @discount_detail = @discount.discount_detail
       @discount_book_ids = @discount_detail.pluck(:book_id)
 
       @bookEdit = Book.where.not(id: @discount_book_ids).where(status: [0, 1])
@@ -93,12 +93,12 @@ class DiscountDetailsController < ApplicationController
           redirect_to request.referrer and return
         end
 
-        flash[:success] = 'Uơdate thành công'
+        flash[:success] = t('flash.update')
         redirect_to request.referrer
     end
 
     def destroy
-      @discount = DiscountDetail.find_by(book_id: params[:book_id], discount_id: params[:id])
+      @discount = DiscountDetail.find(params[:id])
       @discount.delete
       redirect_to request.referrer
     end

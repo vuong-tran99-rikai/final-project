@@ -15,7 +15,9 @@
     <tbody>
       <% @users.each do |user| %>
         <% if user.customer? && !user.deleted?%>
-          <tr><%= render user %></tr>
+          <tr>
+          <%= render user %>
+        </tr>
         <% end %>
       <% end %> 
     </tbody>

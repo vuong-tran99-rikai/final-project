@@ -1,15 +1,16 @@
+
 <% provide(:title, 'All Books') %>
 <h1>All Books</h1>
 
 <div class="container_search">
-  <%= form_tag search_books_path, method: :get do %>
+  <%= form_with(url: admin_books_path, method: "get", class: "form-inline") do |form| %>
     <div class="form_search">
-      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search", aria_label: "Search" %>
+      <%= form.text_field :search, class: "form-control", placeholder: "Search", aria_label: "Search" %>
       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+      <%= form.submit "Search", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
-
 
 <table id="books-table" class="table table-success table-striped">
   <thead>
@@ -33,14 +34,18 @@
         <td><%= book.author %></td>
         <td><%= book.quantity %></td>
         <td><%= book.price %></td>
-        <td><%= image_tag book.image, class: 'book-image', style: 'width: 70%' %></td>
+        <td>
+          <% if book.image.present? %>
+            <%= image_tag book.image.url, class: 'book-image', style: 'width: 70%' %>
+          <% end %>
+        </td>
         <td><%= book.category.name_category %></td>
         <td>
-          <%= button_to book.status.to_s.humanize, toggle_status_book_path(book.id), method: :get, class: 'toggle-status-button', remote: true, style: (book.status.to_s == "Hiển thị") ? "background-color: green;" : "background-color: black;" %>
+          <%= button_to book.status.to_s.humanize, toggle_status_admin_book_path(book.id), method: :patch, class: 'toggle-status-button', remote: true, style: (book.status.to_s == "Open") ? "background-color: green;" : "background-color: black;" %>
         </td>
         <td>
-          <%= button_to "Delete", books_destroy_path(book.id), method: :get, class: 'toggle-status-button', remote: true, id: 'btn_delete' %>
-          <%= button_to "Edit", books_edit_path(book), method: :get, class: 'toggle-status-button', id: 'btn_edit' %>
+          <%= button_to "Delete", admin_book_path(book.id), method: :delete, class: 'toggle-status-button', remote: true, id: 'btn_delete' %>
+          <%= button_to "Edit", edit_admin_book_path(book), method: :get, class: 'toggle-status-button', id: 'btn_edit' %>
         </td>
       </tr>
     <% end %>
@@ -84,3 +89,4 @@
     $('#books-table').DataTable();
   });
 </script>
+

@@ -1,14 +1,12 @@
+
+
 <div class="nav_container">
   <nav>
     <ul class="nav navbar-nav navbar-right">
       <% @category.each do |category| %>
         <!-- <li><a href="/evaluaters"><%= category.name_category %></a></li> -->
         <div class="btn_category">
-          <%= button_to category.name_category,
-            '/evaluaters',
-            method: :get,
-            remote: true
-          %>
+         <%= button_to category.name_category, category_pages_path(category_id: category.id), method: :get, remote: true %>
         </div>
       <% end %>
     </ul>
@@ -17,7 +15,9 @@
 <div class="container_grid">
   <% @books.each do |book| %>
     <div class="box">
-      <%= link_to image_tag(book.image, class: 'img_book_home', alt: book.name_book), detail_path(book) %>
+      <% if book.image.present? %>
+        <%= link_to image_tag(book.image.url, class: 'book-image', style: 'width: 70%'), page_path(book) %>
+      <% end %>
       <div class="description_book">
         <div class="book_name"><%= book.name_book %></div>
         <div class="book_author">Tác giả: <%= book.author %></div>
@@ -66,4 +66,5 @@
     color: #fff;
   }
 </style>
+
 

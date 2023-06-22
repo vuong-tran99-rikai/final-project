@@ -9,26 +9,39 @@ class Book < ApplicationRecord
     has_many :votes
     validates :name_book, presence: true
     validates :description, presence: true
-    validates :image, format: { with: URI::regexp(%w(http https)), message: "must be a valid image URL" }
+    validates :image, presence: true
+    mount_uploader :image, ImageUploader
     validates :author, presence: true
     validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
     validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
     validates :category_id, presence: true
-    enum status: { 'Tạm tắt': 0, 'Hiển thị': 1, delete_book: 2, daxoa: 3 }
+    enum status: { 'Close': 0, 'Open': 1, delete_category: 2 }
     attribute :name_book, :string
 
     def display_price
-        discounts.each do |discount|
-            if discount.Open? 
-                return last_price = {
-                    current: price,
-                    discount: price - (price * discount.gia_KM / 100)
-                }
-            end
-        end
-        return last_price = {
-            current: '',
-            discount: price
+      discount = discounts.Open.first
+      if discount.present?
+        return {
+          current: price,
+          discount: price - (price * discount.gia_KM / 100)
         }
+      end
+
+      {
+        current: '',
+        discount: price
+      }
+        # discounts.each do |discount|
+        #   if discount.Open? 
+        #     return {
+        #       current: price,
+        #       discount: price - (price * discount.gia_KM / 100)
+        #     }
+        #   end
+        # end
+        # return {
+        #   current: '',
+        #   discount: price
+        # }
     end
 end

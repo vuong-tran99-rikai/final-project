@@ -1,17 +1,17 @@
 <td scope="row"><%= user.id %></td>
-<td><%= link_to user.name, edit_user_path(user) %></td>
+<td><%= link_to user.name %></td>
 <td><%= user.email %></td>
 <td><%= user.type_account.to_s.humanize %></td>
 <td>
   <%= button_to user.status.to_s.humanize,
-      convert_status_path(user.id),
-      method: :get,
+      convert_status_admin_user_path(user.id),
+      method: :patch,
       class: user.opened? ? "btn btn-success" : "btn btn-primary" ,
       remote: true
   %>
 </td>
 <td>
   <% if current_user.admin? && !current_user?(user)%>
-    <%= button_to "delete", user, method: :delete, class: "btn btn-danger" %>
+    <%= button_to "delete", admin_user_path(user), method: :delete, class: "btn btn-danger" %>
   <% end %>
 </td>

@@ -3,7 +3,7 @@
 <span>
    <span><%= link_to "Books list", "/books" %></span>
 
-    <%= form_for(@books) do |form| %>
+    <%= form_for([:admin,@books]) do |form| %>
   <div>
     <%= form.label :name_book %>
     <%= form.text_field :name_book %>

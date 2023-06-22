@@ -4,7 +4,9 @@
   <div class="col-md-6 col-md-offset-3">  
     <%= form_for(@evaluater) do |form| %>
       <div class="">
-        <%= link_to image_tag(@book.image, alt: @book.name_book), detail_path(@book), data: { turbolinks: false } %>
+         <% if @book.image.present? %>
+            <%= link_to image_tag(@book.image.url, class: 'book-image', style: 'width: 70%'), page_path(@book) %>
+        <% end %>
       </div>
       <div class="evaluater_book_name"><%= @book.name_book %></div>
       <%= form.hidden_field :book_id, value: @book.id %>
@@ -13,9 +15,9 @@
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="evaluater[level]">
         <option value="1">1 Star</option>
         <option value="2">2 Star</option>
-        <option value="2">3 Star</option>
-        <option value="2">4 Star</option>
-        <option value="2">5 Star</option>
+        <option value="3">3 Star</option>
+        <option value="4">4 Star</option>
+        <option value="5">5 Star</option>
       </select>
       <% if @evaluater.errors.has_key?(:level) %>
         <div class="error">

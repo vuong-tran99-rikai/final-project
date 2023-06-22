@@ -1,8 +1,7 @@
 class EvaluatersController < ApplicationController
-  before_action :admin_user, only: [:index]
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:show, :create]
 
-  def new
+  def show
     @evaluater = Evaluater.new
     @book = Book.find(params[:id])
   end
@@ -12,15 +11,15 @@ class EvaluatersController < ApplicationController
     @book = Book.find(params[:evaluater][:book_id])
     if @evaluater.save
       flash[:success] = "Đã thêm mới đánh giá"
-      redirect_to detail_path(@book)
+      redirect_to page_path(@book.id)
     else
       render :new
     end
   end
 
-  def index
-    @evaluaters = Evaluater.includes([:book,:user])
-  end
+  # def index
+  #   @evaluaters = Evaluater.includes([:book]).includes([:user])
+  # end
 
   private
 

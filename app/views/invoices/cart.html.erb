@@ -1,3 +1,4 @@
+
 <div class="container">
   <% if @cart.empty? %>
     <h5 class="text-center">Giỏ hàng đang rỗng</h5>
@@ -22,19 +23,19 @@
             <% item_quantity = item['quantity'].to_i %>
             <tr>
               <td><%= index + 1 %></td>
-              <td><%= link_to image_tag(book.image, class: 'img_book_home ' , alt: book.name_book), detail_path(book), data: { turbolinks: false } %></td>
+              <td><%= link_to image_tag(book.image, class: 'img_book_home ' , alt: book.name_book), page_path(book), data: { turbolinks: false } %></td>
               <td class="text-center" ><%= book.name_book %></td>
               <td class="text-center">
                 <div style="display: flex; justify-content: space-around; align-items:center">
                   <div class="btn_plus">
-                    <%= button_to "-", reduce_quantity_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
+                    <%= button_to "-", reduce_quantity_invoices_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
                   </div>
                   <div>
                     <%= item['quantity'] %>
                   </div>
                   <div class="btn_minus">
                     <% if item_quantity < max_quantity %>
-                      <%= button_to "+", add_quantity_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
+                      <%= button_to "+", add_quantity_invoices_path(book_id: book.id), method: :post, class: "btn btn-secondary" %>
                     <% else %>
                       <span class="error-message">Số lượng đã đạt tối đa</span>
                     <% end %>
@@ -53,7 +54,7 @@
               </td>
               <td class="text-center"><%= book.display_price[:discount] * item['quantity'] %> ₫</td>
               <td class="text-center">
-                <%= link_to remove_item_path(book_id: book.id), class: 'btn btn-sm btn-danger' do %>
+                <%= link_to remove_item_invoices_path(book_id: book.id), class: 'btn btn-sm btn-danger' do %>
                   <div class="bi bi-trash">X</div>
                 <% end %>
               </td>

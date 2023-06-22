@@ -60,10 +60,9 @@ module SessionHelper
     session[:user_type] = 0
     @current_user = nil
   end
-
+  
   def get_path
     URI.parse(request.original_url).path
   end
-
   
 end

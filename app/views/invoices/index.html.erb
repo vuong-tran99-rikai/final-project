@@ -1,0 +1,21 @@
+<h3>Danh sách hóa đơn</h3>
+<% if @invoices.empty? %>
+  <p>Chưa có hóa đơn nào.</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Số hóa đơn</th>
+        <th>Ngày tạo đơn hàng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoices.each do |invoice| %>
+        <tr>
+          <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+          <td><%= invoice.created_at.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -6,6 +6,9 @@ class SessionController < ApplicationController
     if params[:session][:email].empty? || params[:session][:password].empty?
       flash.now[:danger] = "Vui lòng nhập tài khoản, mật khẩu"
       render "new"
+    elsif params[:session][:email].include?(" ") || params[:session][:password].include?(" ")
+      flash.now[:danger] = "Vui lòng nhập tài khoản, mật khẩu"
+      render "new"
     else
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
@@ -43,14 +46,18 @@ class SessionController < ApplicationController
         u.status = 0
     end
     if user.valid?
-        session[:user_id] = user.id
-        flash[:success] = 'login thành công'
-        redirect_to root_path
-        else
-        flash[:danger] = 'không login thất bại'
-        redirect_to root_path
+        if user.opened?
+          session[:user_id] = user.id
+          flash[:success] = 'login thành công'
+          redirect_to root_path
+        else 
+          flash[:danger] = 'login thất bại'
+          redirect_to root_path
+        end
+    else
+      flash[:danger] = 'login thất bại'
+      redirect_to root_path
     end
   end
-
 end
 
