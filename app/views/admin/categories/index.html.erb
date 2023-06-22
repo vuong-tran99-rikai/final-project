@@ -6,7 +6,7 @@
       <%# <th>STT</th> %>
       <th>Name_category</th>
       <th>Status</th>
-      <th></th>
+      <th>Action</th>
       <!-- Các cột khác (nếu có) -->
     </tr>
   </thead>
@@ -16,13 +16,13 @@
         <td><%= category.name_category %></td>
         <td style="padding: 6px;">
           <div>
-            <%= button_to category.status.to_s.humanize, toggle_status_path(category.id), method: :get, class: (category.status.to_s == 'Open') ? 'btn btn-success' : 'btn btn-secondary', remote: true %>
+            <%= button_to category.status.to_s.humanize, toggle_status_admin_category_path(category.id), method: :patch, class: (category.status.to_s == 'Open') ? 'btn btn-success' : 'btn btn-secondary', remote: true %>
           </div>
         </td>
         <td style="padding: 6px;">
           <div style="display: flex; align-items: center;">
-            <%= button_to "Delete", category_destroy_path(category.id), method: :get, class: 'btn btn-danger', remote: true %>
-            <%= button_to "Edit", category_edit_path(category),method: :get, class: 'btn btn-warning' %>
+            <%= button_to "Delete", admin_category_path(category.id), method: :delete, class: 'btn btn-danger', remote: true %>
+            <%= button_to "Edit", edit_admin_category_path(category),method: :get, class: 'btn btn-warning' %>
           </div>
         </td>
       </tr>

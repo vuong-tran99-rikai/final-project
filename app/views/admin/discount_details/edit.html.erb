@@ -1,3 +1,4 @@
+
 <% provide(:title, 'List discounts') %>
 <h1>List Book Discount</h1>
 <table class="table table-success table-striped">
@@ -13,9 +14,9 @@
   <tbody>
     <% @books.each do |name_book| %>
       <tr>
-        <td><%= name_book.name_book %></td>
+        <td><%= name_book.book.name_book %></td>
         <td>
-          <%= link_to "delete", discount_detail_destroy_path(book_id: name_book.id), class: 'toggle-status-button btn btn-danger' %>
+          <%= button_to "delete", admin_discount_detail_path(name_book), method: :delete, class: 'toggle-status-button btn btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -24,7 +25,7 @@
 <h1>Add discounts</h1>
 <div class="row" style="justify-content: center; color: black;" >
   <div class="col-md-6 col-md-offset-3">
-    <%= form_with url: discount_detail_path(@discounts), method: :patch do |f| %>
+    <%= form_with model: @discount, url: admin_discount_detail_path(@discount), method: :patch do |f| %>
       <%= f.label :name_book %>
       <div class="input-group" style="width: 100%">
         <select class="custom-select" id="inputGroupSelect02" multiple name="discount_detail[book_id][]">
@@ -60,4 +61,6 @@
     });
   });
 </script>
+
+
 

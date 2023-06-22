@@ -1,4 +1,5 @@
-<% provide(:title, 'List Category') %>
+
+  <% provide(:title, 'List Category') %>
 <h1>Rental History</h1>
 <table class="table table-success table-striped">
   <thead>
@@ -21,9 +22,9 @@
         <td><%= history.address %></td>
         <td><%= history.expiry_date %></td>
         <td style="padding: 6px;">
-          <%= button_to history.status.to_s.humanize, toggle_status_history_path(history.id), method: :get, class: 'btn btn-warning', remote: true %>
+          <%= button_to history.status.to_s.humanize, toggle_status_admin_rentalhistory_path(history), method: :patch, class: 'btn btn-warning', remote: true %>
         </td>
-        <td style="padding: 6px;"><%= button_to "Xem chi tiết", history_detail_path(history.id),method: :get, class: 'btn btn-info' %></td>
+        <td style="padding: 6px;"><%= button_to "Xem chi tiết", admin_rentalhistory_path(history),method: :get, class: 'btn btn-info' %></td>
       </tr>
     <% end %>
   </tbody>

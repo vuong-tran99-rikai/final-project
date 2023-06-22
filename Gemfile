@@ -27,6 +27,7 @@ gem 'bullet', group: 'development'
 
 
 gem 'bullet', group: 'development'
+gem 'carrierwave'
 
 
 

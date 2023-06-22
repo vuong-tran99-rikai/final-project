@@ -1,8 +1,9 @@
+
 <% provide(:title, 'Add discounts') %>
 <h1>Add discounts</h1>
 <div class="row" style="justify-content: center; color: black;">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@addDiscount, data: { turbo: false }) do |f| %>
+    <%= form_for([:admin, @addDiscount], data: { turbo: false }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name_book , style: "font-weight: bold;"%>
       <div class="input-group" style="width: 100%">

@@ -1,8 +1,8 @@
 <% provide(:title, 'Edit discounts') %>
 <h1>Edit discounts</h1>
-<div class="row" style="justify-content: center; color: black">
+<div class="row" style="justify-content: center; color: black" id= "edit_discount">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@discount, data: { turbo: false }) do |f| %>
+    <%= form_for([:admin, @discount], data: { turbo: false }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name_KM %>
       <%= f.text_field :name_KM, class: 'form-control' %>
@@ -20,6 +20,11 @@
 <style>
   label {
     font-weight: bold;
+  }
+
+  #edit_discount {
+    justify-content: center;
+    color: black;
   }
 
 </style>

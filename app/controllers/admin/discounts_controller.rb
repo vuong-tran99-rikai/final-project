@@ -1,5 +1,5 @@
 require 'date'
-class DiscountsController < ApplicationController
+class Admin::DiscountsController < ApplicationController
     before_action :admin_user, only: [:new, :create, :update, :destroy, :show, :edit]
     def new
         @discounts = Discount.new
@@ -8,15 +8,15 @@ class DiscountsController < ApplicationController
         @discounts = Discount.new(discount_param)
         @discounts.status = params[:discount][:status].to_i
         if @discounts.save
-            flash[:success] = 'Đã tạo thành công Discount'
-            redirect_to '/create-discounts'
+            flash[:success] = t('flash.create')
+            redirect_to request.referrer
         else
-            flash[:danger] = 'vui lòng nhập thông tin'
+            flash[:danger] = t('flash.error')
             render :new
         end
     end
 
-    def show
+    def index
         @discounts = Discount.where(status: [0, 1])
         current_date = Date.current
         if(@discounts)
@@ -41,22 +41,25 @@ class DiscountsController < ApplicationController
         @discount = Discount.find(params[:id])
         @discount.status = 2
         @discount.save
-        redirect_to '/discount'
+        flash[:success] = t('flash.delete')
+        redirect_to request.referrer
     end
     def edit
         @discount = Discount.find_by(id: params[:id])
         unless @discount.present?
-            redirect_to '/discount', flash: { danger: 'Không tồn tại' }
+            flash[:danger] = t('flash.error')
+            redirect_to request.referrer
         end
     end
     def update
         @discount = Discount.find(params[:id])
+        # byebug
         if @discount.update(discount_param)
-          flash[:success] = 'Update thành công'
-          redirect_to '/discount'
+          flash[:success] =  t('flash.update')
+          redirect_to request.referrer
         else
-          flash[:danger] = 'Category không tồn tại'
-          redirect_to '/discount'
+          flash[:danger] = t('flash.error')
+          redirect_to request.referrer
         end
     end
     private

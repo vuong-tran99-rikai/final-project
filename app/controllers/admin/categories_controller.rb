@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class  Admin::CategoriesController < ApplicationController
     before_action :admin_user, only: [:new, :create, :update, :destroy, :show, :toggle_status, :edit]
 
     def new
@@ -8,15 +8,15 @@ class CategoriesController < ApplicationController
         @categories = Category.new(category_params)
         @categories.status = params[:category][:status].to_i
         if @categories.save
-            flash[:success] = 'Đã tạo thành công Categrory'
-            redirect_to '/create-categories'
+            flash[:success] = t('flash.create')
+            redirect_to request.referrer
         else
-            flash[:danger] = 'vui lòng nhập thông tin'
+            flash[:danger] = t('flash.error')
             render :new
         end
         
     end
-    def show
+    def index
         @categories = Category.where(status: [0, 1])
         if(@categories)
             @categories = Category.where(status: [0, 1]).order(:id)
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
                 @category.status = 'Close'
             end
             @category.save
-            redirect_to '/category'
+            redirect_to request.referrer
     end
     def destroy
         @category = Category.find(params[:id])
@@ -43,10 +43,12 @@ class CategoriesController < ApplicationController
         if @books.present?
             @category.update(status: 2)
             @books.includes(:category).update_all(status: 2)
-            redirect_to '/category', notice: 'xóa thành công' 
+            flash[:success] = t('flash.delete')
+            redirect_to request.referrer
         else
             @category.update(status: 2)
-            redirect_to '/category', notice: 'xóa thành công'
+            flash[:success] = t('flash.delete')
+            redirect_to request.referrer
         end          
     end
     
@@ -54,18 +56,18 @@ class CategoriesController < ApplicationController
         @category = Category.find_by(id: params[:id])
         # byebug
         unless @category.present?
-            redirect_to '/category', flash: { danger: 'Không tồn tại' }
+            redirect_to request.referrer, flash: { danger: 'Không tồn tại' }
         end
     end
 
     def update
         @category = Category.find(params[:id])
         if @category.update(category_params.merge(status: params[:category][:status].to_i))
-          flash[:success] = 'Update thành công'
-          redirect_to '/category'
+          flash[:success] = t('flash.update')
+          redirect_to request.referrer
         else
-          flash[:danger] = 'Category không tồn tại'
-          redirect_to '/category'
+          flash[:danger] =  t('flash.error')
+          redirect_to request.referrer
         end
       end      
     private

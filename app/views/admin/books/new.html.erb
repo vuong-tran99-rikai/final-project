@@ -2,7 +2,7 @@
 <h1>Create Book</h1>
 <div class="row" style="justify-content: center; color: black">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@books) do |f| %>
+    <%= form_for([:admin,@books]) do |f| %>
       <%= f.label :name_book %>
       <%= f.text_field :name_book, class: 'form-control' %>
       <% if @books.errors.has_key?(:name_book) %>
@@ -43,13 +43,14 @@
         </div>
       <% end %>
 
-          <%= f.label :image %>
-      <%= f.text_area :image, class: 'form-control' %>
+      <%= f.label :image %>
+      <%= f.file_field :image %>
       <% if @books.errors.has_key?(:price) %>
         <div class="error">
           <%= @books.errors[:image].first %>
         </div>
       <% end %>
+      
 
       <%= f.label :category_id %>
       <%= f.collection_select :category_id, Category.all, :id, :name_category, {}, class: 'form-control' %>

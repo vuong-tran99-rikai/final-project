@@ -1,5 +1,5 @@
-class RentalhistorysController < ApplicationController
-    def show
+class Admin::RentalhistorysController < ApplicationController
+    def index
         @history = Invoice.joins(:user).where(status: 0).select('invoices.*, users.name').order(:id)
       end
       def toggle_status
@@ -17,10 +17,10 @@ class RentalhistorysController < ApplicationController
         # Cập nhật trạng thái của Invoice thành "borrowed"
         @invoice.status = :borrowed
         @invoice.save
-
+        flash[:success] = t('flash.returned')
         redirect_to request.referrer
       end
-      def show_detail
+      def show
         @invoice = Invoice.find(params[:id])
         @history = @invoice.invoice_details.includes([:book])
         # byebug

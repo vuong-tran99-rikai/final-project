@@ -1,0 +1,32 @@
+<h3>Chi tiết hóa đơn <%= @invoice.id %></h3>
+
+<p><strong>Ngày tạo đơn hàng:</strong> <%= @invoice.created_at.strftime("%d/%m/%Y") %></p>
+<p><strong>Địa chỉ:</strong> <%= @invoice.address %></p>
+<p><strong>Số điện thoại:</strong> <%= @invoice.phone %></p>
+
+<% if @invoice.invoice_details.empty? %>
+  <p>Chưa có thông tin chi tiết.</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên sách</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thành tiền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoice.invoice_details.each.with_index(1) do |detail, index| %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= detail.book.name_book %></td>
+          <td><%= detail.price %></td>
+          <td><%= detail.quantity %></td>
+          <td><%= detail.price * detail.quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,6 +1,7 @@
+
 <div class="detail_book">
   <div class="detail_book_left">
-    <%= image_tag @book.image %>
+    <%= image_tag @book.image.url %>
   </div>
   <div class="detail_book_right">
     <div class="detail_content">
@@ -18,7 +19,7 @@
       <div class="detail_quantity">Số lượng: <%= @book.quantity %></div>
       <%= number_field :quantity, class: 'form-control' %>
       <%= button_to "Thêm",
-          add_item_path(@book.id),
+          add_to_cart_invoices_path(@book.id),
           method: :get,
           disabled: (@book.quantity < 1) ? true : false,
           class: "btn btn-danger",
@@ -27,7 +28,7 @@
       %>
       <div class="btn_vote" style="display: flex; margin: 10px 0;">
         <%= button_to "Đánh giá",
-          create_evaluaters_path(@book.id),
+          evaluater_path(@book.id),
           method: :get,
           class: "btn_comment",
           remote: true
@@ -62,4 +63,7 @@
     padding: 0px 10px;
   }
 </style>
+
+
+
 

@@ -14,16 +14,18 @@ class InvoicesController < ApplicationController
     if @invoice.save
       flash[:info] = "Thuê sách thành công"
       cart.each do |item|
-        book = Book.find(item["book_id"])
-        invoice_detail = InvoiceDetail.new(
-          invoice_id: @invoice.id,
-          book_id: item["book_id"],
-          price: book.display_price[:discount],
-          quantity: item["quantity"],
-          status: 0,
-        )
-        book.update(quantity: book.quantity - item["quantity"])
-        invoice_detail.save
+        book = Book.find_by(id: item["book_id"])
+        if  book
+          invoice_detail = InvoiceDetail.new(
+            invoice_id: @invoice.id,
+            book_id: item["book_id"],
+            price: book.display_price[:discount],
+            quantity: item["quantity"],
+            status: 0,
+          )
+          book.update(quantity: book.quantity - item["quantity"])
+          invoice_detail.save
+        end
       end
       set_cart_cookie([])
       redirect_to root_url
@@ -42,15 +44,18 @@ class InvoicesController < ApplicationController
       if existing_item["quantity"] >= book.quantity
         flash[:danger] = "Book not enough"
       else
+        flash[:success] = t('flash.create')
         existing_item["quantity"] += 1
       end
     else
+      flash[:success] = t('flash.create')
       cart << { "book_id" => book_id, "quantity" => 1 }
     end
 
     set_cart_cookie(cart)
     redirect_to request.referrer
   end
+  
   def cart
     @cart = get_cart_from_cookie || []
   end
@@ -79,7 +84,7 @@ class InvoicesController < ApplicationController
       set_cart_cookie(@cart)
     end
 
-    redirect_to cart_path
+    redirect_to cart_invoices_path
   end
 
   def reduce_quantity
@@ -95,7 +100,7 @@ class InvoicesController < ApplicationController
       set_cart_cookie(@cart)
     end
 
-    redirect_to cart_path
+    redirect_to cart_invoices_path  
   end
 
   def revenue
@@ -108,7 +113,17 @@ class InvoicesController < ApplicationController
 
     @total_revenue = calculate_total_revenue(@invoices)
   end
+  
+  def index
+    @invoices = current_user.invoices
+  end
 
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+  def purchase_history
+    @purchase_histories = Invoice.where(user_id: current_user.id)
+  end
   private
 
   def calculate_total_revenue(invoices)
@@ -124,4 +139,6 @@ class InvoicesController < ApplicationController
   def set_cart_cookie(cart)
     cookies[:cart] = JSON.generate(cart)
   end
+
+
 end

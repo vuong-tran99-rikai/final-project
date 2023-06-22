@@ -1,0 +1,13 @@
+<h1>Edit User</h1>
+<div style="text-align:right">
+   <span><%= link_to "Category list", admin_categories_path %></span>
+  </div>
+<%= form_for([:admin, @category], data: { turbo: false }) do |f| %>
+  <%= f.label :name_category %>
+  <%= f.text_field :name_category, class: 'form-control' %>
+    <div class="form-group">
+    <%= f.label :status %>
+    <%= f.select :status, options_for_select(Category.statuses.except(:delete_category).map { |key, value| [key.capitalize, value] }, Category.statuses[@category.status]) %>
+  </div>
+ <%= f.submit "update changes", class: "btn btn-primary" %>
+<% end %>

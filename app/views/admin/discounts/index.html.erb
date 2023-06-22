@@ -1,3 +1,4 @@
+
 <% provide(:title, 'List discounts') %>
 <h1>List discounts</h1>
 <table class="table table-success table-striped">
@@ -26,12 +27,12 @@
         </td>
         <td style="padding: 4px;">
           <div style="display: flex;">
-            <%= button_to "Delete",discount_destroy_path(discount.id), method: :get, class: 'btn btn-danger', remote: true%>
-            <%= button_to "Edit", discount_edit_path(discount),method: :get, class: "btn btn-warning" %>
+            <%= button_to "Delete",admin_discount_path(discount.id), method: :delete, class: 'btn btn-danger', remote: true%>
+            <%= button_to "Edit", edit_admin_discount_path(discount),method: :get, class: "btn btn-warning" %>
           </div>
         </td>
         <td style="padding: 4px;">
-          <%= button_to "Xem chi tiết", discount_detail_seen_path(discount.id),method: :get, class: 'btn btn-info' %>
+          <%= button_to "Xem chi tiết", edit_admin_discount_discount_detail_path(discount, discount.discount_detail),method: :get, class: 'btn btn-info' %>
         </td>
       </tr>
     <% end %>
@@ -47,3 +48,4 @@
     font-size: 15px;
   }
 </style>
+
