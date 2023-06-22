@@ -1,0 +1,42 @@
+<% provide(:title, 'List Category') %>
+<h1>List Category</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <%# <th>STT</th> %>
+      <th>Name_category</th>
+      <th>Status</th>
+      <th></th>
+      <!-- Các cột khác (nếu có) -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name_category %></td>
+        <td style="padding: 6px;">
+          <div>
+            <%= button_to category.status.to_s.humanize, toggle_status_path(category.id), method: :get, class: (category.status.to_s == 'Open') ? 'btn btn-success' : 'btn btn-secondary', remote: true %>
+          </div>
+        </td>
+        <td style="padding: 6px;">
+          <div style="display: flex; align-items: center;">
+            <%= button_to "Delete", category_destroy_path(category.id), method: :get, class: 'btn btn-danger', remote: true %>
+            <%= button_to "Edit", category_edit_path(category),method: :get, class: 'btn btn-warning' %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<style>
+  .button_to {
+    flex: 1;
+    margin: 4px;
+    
+  }
+  .button_to input{
+    font-size: 15px;
+  }
+</style>

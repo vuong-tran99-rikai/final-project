@@ -1,0 +1,35 @@
+<% provide(:title, 'Create Categories') %>
+<h1>Create Categories</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <div style="text-align:right">
+  </div>
+    <%= form_for(@categories, data: { turbo: false }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name_category %>
+      <%= f.text_field :name_category, class: 'form-control' %>
+
+      <%# <select name="status" class="custom-select"> 
+        <option value="1">hiển thị</option>
+        <option value="0">tạm tắt</option>
+      </select> %>
+      
+      <%#f.select :status, options_for_select(Category.statuses.map { |key, value| [key, value] if [0, 1].include?(value) }.compact), {}, class: 'custom-select' %>
+         <%= f.label :status %>
+        <select name="category[status]" class="custom-select">
+          <% Category.statuses.each do |key, value| %>
+            <% if [0, 1].include?(value) %>
+              <option value="<%= value %>"><%= key.to_s.humanize %></option>
+            <% end %>
+          <% end %>
+        </select>
+      <%= f.submit "Create Categories", class: "btn btn-primary" ,style: "margin-top : 5px" %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .row {
+    justify-content: center;
+  }
+</style>

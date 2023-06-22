@@ -1,0 +1,7 @@
+<% provide(:title, 'Home') %>
+
+<% if admin_user? %>
+  <%= render 'admin' %>
+<% else %>
+  <%= render 'customer' %>
+<% end %>

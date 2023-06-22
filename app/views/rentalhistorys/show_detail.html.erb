@@ -1,0 +1,22 @@
+<% provide(:title, 'Detail Renta') %>
+<h1>Detail Rental</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <%# <th>STT</th> %>
+      <th>Name Book</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <!-- Các cột khác (nếu có) -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @history.each do |history| %>
+      <tr>
+        <td><%= history.book.name_book %></td>
+        <td><%= history.price %></td>
+        <td><%= history.quantity %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

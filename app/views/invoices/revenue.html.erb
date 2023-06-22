@@ -1,0 +1,28 @@
+<h1>Doanh thu</h1>
+
+<%= form_tag revenue_path, method: :get, class: "search-form" do %>
+  <%= label_tag :search_date, "Tìm kiếm theo ngày:", style: "color: black; font-weight: bold;" %>
+  <%= date_field_tag :search_date, params[:search_date], class: "form-control" %>
+  <%= submit_tag "Tìm kiếm", class: "btn btn-primary", style: "margin: 10px 0;" %>
+<% end %>
+
+<p style="color: black;">Tổng doanh thu: <%= number_to_currency(@total_revenue, unit: '₫') %></p>
+
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th>Hóa đơn</th>
+      <th>Tên người mua</th>
+      <th>Tổng tiền</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.id %></td>
+      <td><%= invoice.user&.name || "Unknown" %></td>
+        <td><%= number_to_currency(invoice.total_price, unit: '₫') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

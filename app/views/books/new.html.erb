@@ -1,0 +1,79 @@
+<% provide(:title, 'Create Book') %>
+<h1>Create Book</h1>
+<div class="row" style="justify-content: center; color: black">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@books) do |f| %>
+      <%= f.label :name_book %>
+      <%= f.text_field :name_book, class: 'form-control' %>
+      <% if @books.errors.has_key?(:name_book) %>
+        <div class="error">
+          <%= @books.errors[:name_book].first %>
+        </div>
+      <% end %>
+      
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+      <% if @books.errors.has_key?(:desciption) %>
+        <div class="error">
+          <%= @books.errors[:description].first %>
+        </div>
+      <% end %>
+      
+      <%= f.label :author %>
+      <%= f.text_field :author, class: 'form-control' %>
+      <% if @books.errors.has_key?(:author) %>
+        <div class="error">
+          <%= @books.errors[:author].first %>
+        </div>
+      <% end %>
+      
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity, class: 'form-control' %>
+      <% if @books.errors.has_key?(:quantity) %>
+        <div class="error">
+          <%= @books.errors[:quantity].first %>
+        </div>
+      <% end %>
+
+      <%= f.label :price %>
+      <%= f.number_field :price, class: 'form-control' %>
+      <% if @books.errors.has_key?(:price) %>
+        <div class="error">
+          <%= @books.errors[:price].first %>
+        </div>
+      <% end %>
+
+          <%= f.label :image %>
+      <%= f.text_area :image, class: 'form-control' %>
+      <% if @books.errors.has_key?(:price) %>
+        <div class="error">
+          <%= @books.errors[:image].first %>
+        </div>
+      <% end %>
+
+      <%= f.label :category_id %>
+      <%= f.collection_select :category_id, Category.all, :id, :name_category, {}, class: 'form-control' %>
+      <% if @books.errors.has_key?(:category_id) %>
+        <div class="error">
+          <%= @books.errors[:category_id].first %>
+        </div>
+      <% end %>
+      
+      <%= f.label :status %>
+      <%= f.select :status, { "Hiển thị" => "1", "Tạm tắt" => "0" }, class: "form-select form-select-sm mb-3" %>
+      <% if @books.errors.has_key?(:status) %>
+        <div class="error">
+          <%= @books.errors[:status].first %>
+        </div>
+      <% end %>
+      
+      <%= f.submit "Create Book", class: "btn btn-primary", style: "margin-top: 10px;" %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  label {
+    font-weight: bold;
+  }
+</style>

@@ -1,0 +1,24 @@
+<% provide(:title, 'Danh sách đánh giá') %>
+  <h1>Danh sách đánh giá</h1>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Sách</th>
+      <th>Mức đánh giá</th>
+      <th>Người đánh giá</th>
+      <th>Bình luận</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @evaluaters.each_with_index do |evaluater, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= evaluater.book.name_book %></td>
+        <td><%= evaluater.level %> sao</td>
+        <td><%= evaluater.user.name %></td>
+        <td><%= evaluater.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

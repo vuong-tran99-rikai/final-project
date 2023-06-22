@@ -1,0 +1,2 @@
+module BookDiscountsHelper
+end

@@ -1,0 +1,39 @@
+<div class="container_search">
+  <%= form_with(url: book_discounts_path, method: "get", class: "form-inline") do |form| %>
+    <div class="form_search">
+      <%= form.select 'discount_detail[discount_id]', options_from_collection_for_select(@discount, :id, :name_KM), { prompt: 'Chọn khuyến mãi' }, { class: 'custom-select', id: 'inputGroupSelect02' } %>
+      <%= form.submit "Search", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container_grid">
+  <% @books.each do |book| %>
+    <div class="box">
+      <%= link_to image_tag(book.image, class: 'img_book_home', alt: book.name_book), detail_path(book) %>
+      <div class="description_book">
+        <div><%= book.name_book %></div>
+        <div>Tác giả: <%= book.author %></div>
+        <div class="price_info">
+          <div>Giá: </div>
+          <div class="price_discount"><%= book.display_price[:discount] %></div>
+          <div class="price_current"><%= book.display_price[:current] %></div>
+          <div>đ</div>
+        </div>
+      </div>
+      <%= button_to "Thêm",
+        add_to_cart_invoices_path(book_id: book.id),
+        method: :get,
+        disabled: (book.quantity < 1) ? true : false,
+        class: "btn btn-success",
+        remote: true
+      %>
+    </div>
+  <% end %> 
+</div>
+
+<style>
+  .custom-select{
+    width: auto;
+  }
+</style>

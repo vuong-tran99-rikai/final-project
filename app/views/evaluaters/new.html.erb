@@ -1,0 +1,45 @@
+<% provide(:title, 'Đánh giá sách') %>
+<h1>Đánh giá sách</h1>
+<div class="row" style="justify-content: center; color: black;">
+  <div class="col-md-6 col-md-offset-3">  
+    <%= form_for(@evaluater) do |form| %>
+      <div class="">
+        <%= link_to image_tag(@book.image, alt: @book.name_book), detail_path(@book), data: { turbolinks: false } %>
+      </div>
+      <div class="evaluater_book_name"><%= @book.name_book %></div>
+      <%= form.hidden_field :book_id, value: @book.id %>
+      <%= form.label :level %>
+      <!-- <%= form.select :level, options_for_select((1..5).map { |i| ["#{i} sao", i] }) %> -->
+      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="evaluater[level]">
+        <option value="1">1 Star</option>
+        <option value="2">2 Star</option>
+        <option value="2">3 Star</option>
+        <option value="2">4 Star</option>
+        <option value="2">5 Star</option>
+      </select>
+      <% if @evaluater.errors.has_key?(:level) %>
+        <div class="error">
+          <%= @evaluater.errors[:level].first %>
+        </div>
+      <% end %>
+      
+      <%= form.label :comment %>
+      <%= form.text_area :comment, class: 'form-control' %>
+      <%= @evaluater.errors[:comment].first %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+
+      <%= form.submit 'Đánh giá sách', class: "btn btn-primary", style: 'margin-top: 10px' %>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  label {
+    font-weight: bold;
+  }
+
+  img {
+    max-width: 90%;
+    max-height: 700px;
+  }
+</style>

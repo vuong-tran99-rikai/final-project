@@ -1,0 +1,16 @@
+<h1>Edit Category</h1>
+<%= form_for(@category, data: { turbo: false }) do |f| %>
+  <%= f.label :name_category %>
+  <%= f.text_field :name_category, class: 'form-control' %>
+    <div class="form-group">
+    <%= f.label :status %>
+  <select name="category[status]" class="custom-select">
+    <% Category.statuses.each do |key, value| %>
+      <% if [0, 1].include?(value) %>
+        <option value="<%= value %>"><%= key.to_s.humanize %></option>
+      <% end %>
+    <% end %>
+   </select>
+  </div>
+  <%= f.submit "Update Changes", class: "btn btn-primary" %>
+<% end %>
