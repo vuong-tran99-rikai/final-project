@@ -1,12 +1,9 @@
-
-
 <div class="nav_container">
   <nav>
     <ul class="nav navbar-nav navbar-right">
       <% @category.each do |category| %>
-        <!-- <li><a href="/evaluaters"><%= category.name_category %></a></li> -->
         <div class="btn_category">
-        <%= link_to category.name_category, root_url(category_id: category.id), method: :get, remote: true, class: "button-style" %>
+          <%= link_to category.name_category, root_url(category_id: category.id), method: :get, remote: true %>
         </div>
       <% end %>
     </ul>
@@ -57,7 +54,7 @@
     margin-left: 8px;
   }
 
-  .btn_category form input {
+  .btn_category a{
     font-size: 13px;
     padding: 6px 13px;
     border-radius: 52px;

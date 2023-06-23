@@ -1,13 +1,16 @@
 <h3>Chi tiết hóa đơn <%= @invoice.id %></h3>
 
-<p><strong>Ngày tạo đơn hàng:</strong> <%= @invoice.created_at.strftime("%d/%m/%Y") %></p>
-<p><strong>Địa chỉ:</strong> <%= @invoice.address %></p>
-<p><strong>Số điện thoại:</strong> <%= @invoice.phone %></p>
+<p style="color: black"><strong>Ngày tạo đơn hàng:</strong> <%= @invoice.created_at.strftime("%d/%m/%Y") %></p>
+<p style="color: black"><strong>Địa chỉ:</strong> <%= @invoice.address %></p>
+<p style="color: black"><strong>Số điện thoại:</strong> <%= @invoice.phone %></p>
 
 <% if @invoice.invoice_details.empty? %>
   <p>Chưa có thông tin chi tiết.</p>
 <% else %>
-  <table>
+  <div>
+
+  </div>
+  <table class="table table-success table-hover">
     <thead>
       <tr>
         <th>STT</th>

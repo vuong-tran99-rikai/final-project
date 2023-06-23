@@ -1,6 +1,6 @@
 <% provide(:title, 'List Category') %>
 <h1>List Category</h1>
-<table class="table table-success table-striped">
+<table class="table table-success table-hover">
   <thead>
     <tr>
       <%# <th>STT</th> %>
@@ -15,12 +15,12 @@
       <tr>
         <td><%= category.name_category %></td>
         <td style="padding: 6px;">
-          <div>
+          <div class="action_category">
             <%= button_to category.status.to_s.humanize, toggle_status_admin_category_path(category.id), method: :patch, class: (category.status.to_s == 'Open') ? 'btn btn-success' : 'btn btn-secondary', remote: true %>
           </div>
         </td>
         <td style="padding: 6px;">
-          <div style="display: flex; align-items: center;">
+          <div class="action_category" style="display: flex; align-items: center;">
             <%= button_to "Delete", admin_category_path(category.id), method: :delete, class: 'btn btn-danger', remote: true %>
             <%= button_to "Edit", edit_admin_category_path(category),method: :get, class: 'btn btn-warning' %>
           </div>
@@ -31,10 +31,9 @@
 </table>
 
 <style>
-  .button_to {
+  .action_category form{
     flex: 1;
     margin: 4px;
-    
   }
   .button_to input{
     font-size: 15px;

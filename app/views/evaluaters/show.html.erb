@@ -5,7 +5,7 @@
     <%= form_for(@evaluater) do |form| %>
       <div class="">
          <% if @book.image.present? %>
-            <%= link_to image_tag(@book.image.url, class: 'book-image', style: 'width: 70%'), page_path(@book) %>
+            <%= link_to image_tag(@book.image.url, class: 'book-image'), page_path(@book) %>
         <% end %>
       </div>
       <div class="evaluater_book_name"><%= @book.name_book %></div>
@@ -41,7 +41,7 @@
   }
 
   img {
-    max-width: 90%;
-    max-height: 700px;
+    width: 480px;
+    height: 500px;
   }
 </style>

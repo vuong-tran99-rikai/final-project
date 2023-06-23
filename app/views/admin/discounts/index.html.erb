@@ -1,7 +1,7 @@
-
 <% provide(:title, 'List discounts') %>
 <h1>List discounts</h1>
-<table class="table table-success table-striped">
+
+<table class="table table-success table-hover">
   <thead>
     <tr>
       <%# <th>STT</th> %>
@@ -12,7 +12,6 @@
       <th>Status</th>
       <th>Action</th>
       <th></th>
-      <!-- Các cột khác (nếu có) -->
     </tr>
   </thead>
   <tbody>
@@ -26,13 +25,13 @@
           <%=discount.status.to_s.humanize %>
         </td>
         <td style="padding: 4px;">
-          <div style="display: flex;">
-            <%= button_to "Delete",admin_discount_path(discount.id), method: :delete, class: 'btn btn-danger', remote: true%>
-            <%= button_to "Edit", edit_admin_discount_path(discount),method: :get, class: "btn btn-warning" %>
+          <div class="action_discount" style="display: flex;">
+            <%= button_to "Delete",admin_discount_path(discount.id), method: :delete, class: 'btn btn-danger', remote: true, id: "btn_delete_discount"%>
+            <%= button_to "Edit", edit_admin_discount_path(discount),method: :get, class: "btn btn-warning", id: "btn_edit_discount" %>
           </div>
         </td>
-        <td style="padding: 4px;">
-          <%= button_to "Xem chi tiết", edit_admin_discount_discount_detail_path(discount, discount.discount_detail),method: :get, class: 'btn btn-info' %>
+        <td class="action_discount" style="padding: 4px;">
+          <%= button_to "Xem chi tiết", edit_admin_discount_discount_detail_path(discount, discount.discount_detail),method: :get, class: 'btn btn-info', id: "btn_info_discount" %>
         </td>
       </tr>
     <% end %>
@@ -40,7 +39,7 @@
 </table>
 
 <style>
-  .button_to{
+  .action_discount form{
     flex: 1;
     margin: 4px;
   }

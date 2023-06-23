@@ -34,6 +34,18 @@ class InvoicesController < ApplicationController
       render "new"
     end
   end
+
+  def index
+    @invoices = current_user.invoices
+  end
+
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+  def purchase_history
+    @purchase_histories = Invoice.where(user_id: current_user.id)
+  end
+
   def add_to_cart
     book_id = params[:book_id]
     book = Book.find(book_id)
@@ -103,16 +115,6 @@ class InvoicesController < ApplicationController
     redirect_to cart_invoices_path  
   end
   
-  def index
-    @invoices = current_user.invoices
-  end
-
-  def show
-    @invoice = Invoice.find(params[:id])
-  end
-  def purchase_history
-    @purchase_histories = Invoice.where(user_id: current_user.id)
-  end
   private
 
   def calculate_total_revenue(invoices)
