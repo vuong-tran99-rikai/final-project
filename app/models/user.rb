@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :votes
   has_many :books, through: :vote
+  mount_uploader :image, ImageUploader
 
   enum status: {
     opened: 0,

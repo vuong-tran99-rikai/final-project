@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :remember_digest
       t.string :address
       t.integer :type_account
+      t.string :image
       t.string :phone
       t.integer :status
 

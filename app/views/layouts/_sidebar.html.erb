@@ -1,6 +1,18 @@
 <nav id="sidebar">
   <div class="p-4 pt-5">
-    <a href="#" class="img logo rounded-circle mb-4" style="background-image: url('http://localhost:3000/assets/logo-c6ee3ba15691907e601e62d496673318f966e49f85d30ae66f039520b10afc29.jpg');"></a>
+    <%
+=begin%>
+ <a href="#" class="img logo rounded-circle mb-4"
+     style="background-image: url('http://localhost:3000/assets/logo-c6ee3ba15691907e601e62d496673318f966e49f85d30ae66f039520b10afc29.jpg');">
+     </a> 
+<%
+=end%>
+<% if current_user.try(:image).present? %>
+  <%= image_tag current_user.image.url, class: "img logo rounded-circle mb-4" %>
+<% else %>
+  <%= image_tag 'https://static.javatpoint.com/difference/images/client-vs-server.png', class: "img logo rounded-circle mb-4" %>
+<% end %>
+
     <ul class="list-unstyled components mb-5">
       <% if logged? %>
         <% if admin_user? %>
