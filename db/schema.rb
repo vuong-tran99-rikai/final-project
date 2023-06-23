@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2023_06_18_041249) do
     t.string "remember_digest"
     t.string "address"
     t.integer "type_account"
+    t.string "image"
     t.string "phone"
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
