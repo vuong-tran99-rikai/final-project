@@ -14,8 +14,8 @@
         <%= link_to image_tag(book.image.url, class: 'img_book_home'), page_path(book) %>
       <% end %>
       <div class="description_book">
-        <div><%= book.name_book %></div>
-        <div>Tác giả: <%= book.author %></div>
+        <div class="book_name"><%= book.name_book %></div>
+        <div class="book_author">Tác giả: <%= book.author %></div>
         <div class="price_info">
           <div>Giá: </div>
           <div class="price_discount"><%= book.display_price[:discount] %></div>
