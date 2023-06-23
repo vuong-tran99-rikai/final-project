@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root 'pages#home'
   scope "(:locale)", locale: /en|vi/ do
+  root 'pages#home'
     namespace :admin do
       resources :categories do
         member do

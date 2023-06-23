@@ -418,12 +418,13 @@ td {
   }
 }
 
+
 .img_book_home {
-  height: 200px;
+  height: 230px;
+  width: 200px;
   display: block;
   margin: auto;
   transition: all .2s ease;
-  width: 350px
 }
 
 .detail_book {
@@ -435,6 +436,7 @@ td {
   flex: 2;
   img {
     width: 100%;
+    height: 350px;
   }
 }
 

@@ -1,45 +1,38 @@
 <nav id="sidebar">
   <div class="p-4 pt-5">
-    <%
-=begin%>
- <a href="#" class="img logo rounded-circle mb-4"
-     style="background-image: url('http://localhost:3000/assets/logo-c6ee3ba15691907e601e62d496673318f966e49f85d30ae66f039520b10afc29.jpg');">
-     </a> 
-<%
-=end%>
-<% if current_user.try(:image).present? %>
-  <%= image_tag current_user.image.url, class: "img logo rounded-circle mb-4" %>
-<% else %>
-  <%= image_tag 'https://static.javatpoint.com/difference/images/client-vs-server.png', class: "img logo rounded-circle mb-4" %>
-<% end %>
+    <% if current_user.try(:image).present? %>
+      <%= image_tag current_user.image.url, class: "img logo rounded-circle mb-4" %>
+    <% else %>
+      <%= image_tag 'https://static.javatpoint.com/difference/images/client-vs-server.png', class: "img logo rounded-circle mb-4" %>
+    <% end %>
 
     <ul class="list-unstyled components mb-5">
       <% if logged? %>
         <% if admin_user? %>
-          <li><%= link_to "Dashboards", revenue_admin_invoices_path , style: (get_path.include?("revenue")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Dashboards", revenue_admin_invoices_path , style: (get_path == '/admin/invoices/revenue') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li>
-            <%= link_to "Categories", "#categoriesSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("categor")) ? "color: #f8b739;" : "#FFFFFFCC" %>
+            <%= link_to "Categories", "#categoriesSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("categories")) ? "color: #f8b739;" : "#FFFFFFCC" %>
             <ul class="collapse list-unstyled" id="categoriesSubmenu">
-              <li><%= link_to "All", admin_categories_path, style: (get_path == '/category') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-              <li><%= link_to "Create", new_admin_category_path, style: (get_path == '/create-categories') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "All", admin_categories_path, style: (get_path == '/admin/categories') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create", new_admin_category_path, style: (get_path == '/admin/categories/new') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
             </ul>
           </li>
-          <li><%= link_to "Rental History", admin_rentalhistorys_path, style: (get_path.include?("rentalhistorys")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-          <li><%= link_to "Evaluater", admin_evaluaters_path, style: (get_path == '/evaluaters') ? "color: #f8b739;" : "#FFFFFFCC"  %></li>
+          <li><%= link_to "Rental History", admin_rentalhistorys_path, style: (get_path == '/admin/rentalhistorys') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Evaluater", admin_evaluaters_path, style: (get_path == '/admin/evaluaters') ? "color: #f8b739;" : "#FFFFFFCC"  %></li>
           <li>
             <%= link_to "Discounts", "#discountsSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("discount")) ? "color: #f8b739;" : "#FFFFFFCC" %>
             <ul class="collapse list-unstyled" id="discountsSubmenu">
-              <li><%= link_to "All", admin_discounts_path, style: (get_path == '/discount') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-              <li><%= link_to "Create Book Discount", new_admin_discount_detail_path, style: (get_path == '/add-discount') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-              <li><%= link_to "Create Discount", new_admin_discount_path, style: (get_path == '/create-discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "All", admin_discounts_path, style: (get_path == '/admin/discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create Book Discount", new_admin_discount_detail_path, style: (get_path == '/admin/discount_details/new') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create Discount", new_admin_discount_path, style: (get_path == '/admin/discounts/new') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
             </ul>
           </li>
           <li><%= link_to "Users", admin_users_path, style: (get_path.include?("users")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li>
             <%= link_to "Books", "#booksSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("book")) ? "color: #f8b739;" : "#FFFFFFCC" %>
             <ul class="collapse list-unstyled" id="booksSubmenu">
-              <li><%= link_to "All", admin_books_path, style: (get_path == '/books') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-              <li><%= link_to "Create", new_admin_book_path, style: (get_path == '/create-book') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "All", admin_books_path, style: (get_path == '/admin/books') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+              <li><%= link_to "Create", new_admin_book_path, style: (get_path == '/admin/books/new') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
             </ul>
           </li>
         <% else %>

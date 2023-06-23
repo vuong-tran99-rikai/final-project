@@ -1,35 +1,4 @@
-# require 'unidecode'
 class PagesController < ApplicationController
-  # def home
-  #   if params[:search].present?
-  #     @books = Book.where("LOWER(name_book) LIKE ?", "%#{params[:search].downcase}%").where(status: 1).order(:id)
-  #     @category = Category.where(status: 1)
-  #   else
-  #     @category = Category.where(status: 1)
-  #     @books = Book.includes(:discounts).where(status: 1).order(:id)
-  #   end
-  # end
-  # def home
-  #   @category = Category.where(status: 1)
-    
-  #   if params[:search].present?
-  #     @books = Book.where("LOWER(name_book) LIKE ?", "%#{params[:search].downcase}%")
-  #                  .where(status: 1)
-  #                  .includes(:discounts)
-  #                  .order(:id)
-  #   elsif params[:category_id].present?
-  #     @books = Book.includes(:discounts)
-  #            .joins(:category)
-  #            .where(categories: { id: params[:category_id], status: 1 })
-  #            .where(status: 1)
-  #            .order(:id)
-  #   else
-  #     @books = Book.includes(:discounts)
-  #                  .where(status: 1)
-  #                  .order(:id)
-  #   end
-  # end
-
   def home
     @category = Category.where(status: 1)
     
@@ -37,12 +6,7 @@ class PagesController < ApplicationController
       @books = Book.where("LOWER(name_book) LIKE ?", "%#{params[:search].downcase}%")
                    .where(status: 1)
                    .order(:id)
-      # search_term = params[:search].downcase
-      # normalized_search_term = ActiveSupport::Inflector.transliterate(search_term)
 
-      # @books = Book.where("LOWER(name_book) LIKE ?", "%#{normalized_search_term}%")
-      #         .where(status: 1)
-      #         .order(:id)
     elsif params[:category_id].present?
       @books = Book.joins(:category)
                    .where(categories: { id: params[:category_id], status: 1 })
@@ -53,14 +17,9 @@ class PagesController < ApplicationController
                    .order(:id)
     end
   end
-  
-  
-  
 
   def show
     @book = Book.find(params[:id])
     @evaluaters = Evaluater.where(book_id: @book.id).includes(:user)
   end
-
-  
 end

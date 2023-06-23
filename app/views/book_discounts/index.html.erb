@@ -27,7 +27,7 @@
         add_to_cart_invoices_path(book_id: book.id),
         method: :get,
         disabled: (book.quantity < 1) ? true : false,
-        class: "btn btn-success",
+        class: "btn btn-danger",
         remote: true
       %>
     </div>

@@ -62,7 +62,13 @@ module SessionHelper
   end
   
   def get_path
-    URI.parse(request.original_url).path
+    path = URI.parse(request.original_url).path
+    return path.slice(3, path.length - 3) unless path == '/'
+    return path
+  end
+
+  def get_i18n
+    I18n.locale
   end
   
 end
