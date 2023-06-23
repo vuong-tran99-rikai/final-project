@@ -4,27 +4,28 @@ class SessionController < ApplicationController
 
   def create
     if params[:session][:email].empty? || params[:session][:password].empty?
-      flash.now[:danger] = "Vui lòng nhập tài khoản, mật khẩu"
+      flash.now[:danger] = t('flash.error')
       render "new"
     elsif params[:session][:email].include?(" ") || params[:session][:password].include?(" ")
-      flash.now[:danger] = "Vui lòng nhập tài khoản, mật khẩu"
+      flash.now[:danger] = t('flash.error')
       render "new"
     else
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
         if user.deleted?
-          flash.now[:danger] = "Tài khoản không tồn tại"
+          flash.now[:danger] = t('flash.error')
           render "new"
         elsif user.closed?
-            flash.now[:danger] = "Tài khoản của bạn đã bị khóa"
+            flash.now[:danger] = t('flash.loginlock')
             render "new"
         else
           log_in user
           remember user
+          flash[:success] = t('flash.login')
           redirect_to root_url
         end
       else
-        flash.now[:danger] = "Tài khoản hoặc mật khâu không chính xác"
+        flash.now[:danger] = t('flash.error')
         render "new"
       end
     end
@@ -48,14 +49,14 @@ class SessionController < ApplicationController
     if user.valid?
         if user.opened?
           session[:user_id] = user.id
-          flash[:success] = 'login thành công'
+          flash[:success] = t('flash.login')
           redirect_to root_path
         else 
-          flash[:danger] = 'login thất bại'
+          flash[:danger] = t('flash.loginerror')
           redirect_to root_path
         end
     else
-      flash[:danger] = 'login thất bại'
+      flash[:danger] = t('flash.loginerror')
       redirect_to root_path
     end
   end

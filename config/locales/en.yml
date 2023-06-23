@@ -37,3 +37,23 @@ en:
     delete: " success delete"
     update: "Succsess Update"
     returned: "Success Book Returned"
+    login: "Success Login"
+    # logout: "Succcess Logout"
+    loginerror: "Error Login"
+    loginlock: "account has been locked"
+    book: "successful book rental"
+
+vi:
+  flash:
+    create: "tạo mới thành công."
+    error: "Lỗi."
+    # notice: "Notice message."
+    delete: " Xóa thành công"
+    update: "Update thành công"
+    returned: "Trả sách thành công"
+    login: "Đăng nhập thành công"
+    logout: "Đăng xuất thành công"
+    loginerror: "đăng nhập lỗi"
+    # logouterror: "Succcess Logout"
+    loginlock: "Tài khoản đã bị khóa"
+    book: "Thuê sách thành công"

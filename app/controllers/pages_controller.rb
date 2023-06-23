@@ -1,3 +1,4 @@
+# require 'unidecode'
 class PagesController < ApplicationController
   # def home
   #   if params[:search].present?
@@ -36,6 +37,12 @@ class PagesController < ApplicationController
       @books = Book.where("LOWER(name_book) LIKE ?", "%#{params[:search].downcase}%")
                    .where(status: 1)
                    .order(:id)
+      # search_term = params[:search].downcase
+      # normalized_search_term = ActiveSupport::Inflector.transliterate(search_term)
+
+      # @books = Book.where("LOWER(name_book) LIKE ?", "%#{normalized_search_term}%")
+      #         .where(status: 1)
+      #         .order(:id)
     elsif params[:category_id].present?
       @books = Book.joins(:category)
                    .where(categories: { id: params[:category_id], status: 1 })
@@ -55,20 +62,5 @@ class PagesController < ApplicationController
     @evaluaters = Evaluater.where(book_id: @book.id).includes(:user)
   end
 
-  def category
-    @category = Category.where(status: 1)
-    # byebug  
-    if params[:category_id].present?
-      @books = Book.joins(:category)
-                   .where(categories: { id: params[:category_id], status: 1 })
-                   .where(status: 1)
-                   .order(:id)
-      redirect_to request.referrer
-    else
-      @books = []
-      redirect_to request.referrer
-    end
-  end
-  
   
 end

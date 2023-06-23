@@ -69,8 +69,10 @@ class  Admin::CategoriesController < ApplicationController
           flash[:danger] =  t('flash.error')
           redirect_to request.referrer
         end
-      end      
+    end  
+
     private
+    
     def category_params
         params.require(:category).permit(:name_category)
     end

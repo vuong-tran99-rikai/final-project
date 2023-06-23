@@ -8,7 +8,7 @@ class BookDiscountsController < ApplicationController
         @discount = Discount.where(status: 1)
         @books = @discounts.books.where(status: 1)
       else
-        flash[:error] = "Không tìm thấy khuyến mãi"
+        flash[:error] = t('flash.error')
         redirect_to '/book_discounts'
       end
     elsif @books.present?
