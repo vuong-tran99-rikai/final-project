@@ -4,7 +4,7 @@
     <h5 class="text-center">Giỏ hàng đang rỗng</h5>
   <% else %>
     <div id="cart-table">
-      <table class="table table-success table-striped">
+      <table class="table table-success table-hover">
         <thead>
           <tr>
             <th scope="col">STT</th>
@@ -24,7 +24,7 @@
             <tr>
               <td><%= index + 1 %></td>
               <td><% if book.image.present? %>
-                <%= link_to image_tag(book.image.url, class: 'book-image', style: 'width: 70%'), page_path(book) %>
+                <%= link_to image_tag(book.image.url, class: 'img_book_home'), page_path(book) %>
               <% end %>
               </td>
               <td class="text-center" ><%= book.name_book %></td>

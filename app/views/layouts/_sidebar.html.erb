@@ -24,7 +24,7 @@
               <li><%= link_to "Create", new_admin_category_path, style: (get_path == '/create-categories') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
             </ul>
           </li>
-          <li><%= link_to "Rental History", admin_rentalhistorys_path, style: (get_path == '/rental-history') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Rental History", admin_rentalhistorys_path, style: (get_path.include?("rentalhistorys")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li><%= link_to "Evaluater", admin_evaluaters_path, style: (get_path == '/evaluaters') ? "color: #f8b739;" : "#FFFFFFCC"  %></li>
           <li>
             <%= link_to "Discounts", "#discountsSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("discount")) ? "color: #f8b739;" : "#FFFFFFCC" %>
@@ -45,7 +45,7 @@
         <% else %>
           <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li><%= link_to "Discount Book", book_discounts_path , style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
-           <li><%= link_to "History", invoices_path , style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "History", invoices_path , style: (get_path.include?("invoices")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li><%= link_to "Setting", edit_user_path(current_user), style: (get_path.include?("user") && get_path.include?("edit")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
         <% end %>
       <% else %>

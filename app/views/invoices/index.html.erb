@@ -2,20 +2,36 @@
 <% if @invoices.empty? %>
   <p>Chưa có hóa đơn nào.</p>
 <% else %>
-  <table>
+  <table class="table table-success table-hover">
     <thead>
       <tr>
         <th>Số hóa đơn</th>
         <th>Ngày tạo đơn hàng</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <% @invoices.each do |invoice| %>
         <tr>
-          <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+          <td><%= invoice.id %></td>
           <td><%= invoice.created_at.strftime("%d/%m/%Y") %></td>
+          <td style="padding: 8px">
+            <%= button_to 'Xem chi tiết',
+              invoice_path(invoice),
+              method: :get,
+              class: "btn btn-info",
+              remote: true,
+              id: "btn_info_invoice"
+            %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% end %>
+
+<style>
+  #btn_info_invoice {
+    
+  }
+</style>

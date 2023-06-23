@@ -1,47 +1,36 @@
 <% provide(:title, 'Edit Book') %>
 <h1>Edit Book</h1>
-<span>
-   <span><%= link_to "Books list", "/books" %></span>
-
-    <%= form_for([:admin,@books]) do |form| %>
-  <div>
-    <%= form.label :name_book %>
-    <%= form.text_field :name_book %>
-  </div>
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-  <div>
-    <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
-  <div>
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity %>
-  </div>
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-   <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-  <div>
-    <%= form.label :category_id %>
-    <%= form.collection_select :category_id, Category.all, :id, :name_category, {}, class: 'form-control' %>
-  </div>
-  <div>
-<%= form.label :status %>
-<select name="book[status]" class="custom-select">
-  <% Book.statuses.each do |key, value| %>
-    <% if [0, 1].include?(value) %>
-      <% selected = (@books.status.to_i == value) ? 'selected' : '' %>
-      <option value="<%= value %>" <%= selected %>><%= key.to_s.humanize %></option>
+<%= form_for([:admin,@books]) do |form| %>
+  <%= form.label :name_book %>
+  <%= form.text_field :name_book, class: 'form-control' %>
+  <%= form.label :description %>
+  <%= form.text_area :description, class: 'form-control' %>
+  <%= form.label :author %>
+  <%= form.text_field :author, class: 'form-control' %>
+  <%= form.label :quantity %>
+  <%= form.number_field :quantity, class: 'form-control' %>
+  <%= form.label :price %>
+  <%= form.number_field :price, class: 'form-control' %>
+  <%= form.label :image %>
+  <%= form.file_field :image, class: 'form-control' %>
+  <%= form.label :category_id %>
+  <%= form.collection_select :category_id, Category.all, :id, :name_category, {}, class: 'form-control' %>
+  <%= form.label :status %>
+  <select name="book[status]" class="custom-select">
+    <% Book.statuses.each do |key, value| %>
+      <% if [0, 1].include?(value) %>
+        <% selected = (@books.status.to_i == value) ? 'selected' : '' %>
+        <option value="<%= value %>" <%= selected %>><%= key.to_s.humanize %></option>
+      <% end %>
     <% end %>
-  <% end %>
-</select>
-  <%= form.submit "update changes", class: "btn btn-primary" %>
+  </select>
+  <%= form.submit "update changes", class: "btn btn-primary", style: 'margin-top: 10px' %>
 <% end %>
+
+<style>
+  label {
+    color: black;
+    font-weight: bold;
+  }
+</style>
 

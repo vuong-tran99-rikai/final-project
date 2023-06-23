@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if @user.save 
       flash[:info] = t('flash.create')
       log_in(@user)
-      redirect_to @user
+      redirect_to root_url
     else
       flash[:error] = t('flash.error')
       render 'new'
