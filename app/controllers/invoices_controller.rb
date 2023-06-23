@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(invoice_params.merge!(status: 0))
     @cart = get_cart_from_cookie
     if @invoice.save
-      flash[:info] = "Thuê sách thành công"
+      flash[:info] = t('flash.book')
       cart.each do |item|
         book = Book.find_by(id: item["book_id"])
         if  book
@@ -30,7 +30,7 @@ class InvoicesController < ApplicationController
       set_cart_cookie([])
       redirect_to root_url
     else
-      flash[:error] = "An error has occurred"
+      flash[:error] = t('flash.error')
       render "new"
     end
   end
@@ -102,17 +102,6 @@ class InvoicesController < ApplicationController
 
     redirect_to cart_invoices_path  
   end
-
-  def revenue
-    if params[:search_date].present?
-      date = params[:search_date]
-      @invoices = Invoice.includes(:user).where("DATE(created_at) = ?", date)
-    else
-      @invoices = Invoice.includes(:user)
-    end
-
-    @total_revenue = calculate_total_revenue(@invoices)
-  end
   
   def index
     @invoices = current_user.invoices
@@ -129,7 +118,7 @@ class InvoicesController < ApplicationController
   def calculate_total_revenue(invoices)
     invoices.sum(&:total_price)
   end
-  private
+  
 
 
   def invoice_params

@@ -28,6 +28,8 @@ gem 'bullet', group: 'development'
 
 gem 'bullet', group: 'development'
 gem 'carrierwave'
+# gem 'unidecode'
+gem "rails-i18n"
 
 
 

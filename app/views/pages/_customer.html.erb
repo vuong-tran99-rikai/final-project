@@ -6,7 +6,7 @@
       <% @category.each do |category| %>
         <!-- <li><a href="/evaluaters"><%= category.name_category %></a></li> -->
         <div class="btn_category">
-         <%= button_to category.name_category, category_pages_path(category_id: category.id), method: :get, remote: true %>
+        <%= link_to category.name_category, root_url(category_id: category.id), method: :get, remote: true, class: "button-style" %>
         </div>
       <% end %>
     </ul>
@@ -16,7 +16,7 @@
   <% @books.each do |book| %>
     <div class="box">
       <% if book.image.present? %>
-        <%= link_to image_tag(book.image.url, class: 'book-image', style: 'width: 70%'), page_path(book) %>
+        <%= link_to image_tag(book.image.url, class: 'img_book_home'), page_path(book) %>
       <% end %>
       <div class="description_book">
         <div class="book_name"><%= book.name_book %></div>
@@ -65,6 +65,25 @@
     background-color: rgb(0, 101, 255);
     color: #fff;
   }
+  .button-style {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-style:hover {
+  background-color: #45a049;
+}
+
+.button-style:active {
+  background-color: #3e8e41;
+}
+
 </style>
 
 

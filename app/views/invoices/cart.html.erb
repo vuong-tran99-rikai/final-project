@@ -23,7 +23,10 @@
             <% item_quantity = item['quantity'].to_i %>
             <tr>
               <td><%= index + 1 %></td>
-              <td><%= link_to image_tag(book.image, class: 'img_book_home ' , alt: book.name_book), page_path(book), data: { turbolinks: false } %></td>
+              <td><% if book.image.present? %>
+                <%= link_to image_tag(book.image.url, class: 'book-image', style: 'width: 70%'), page_path(book) %>
+              <% end %>
+              </td>
               <td class="text-center" ><%= book.name_book %></td>
               <td class="text-center">
                 <div style="display: flex; justify-content: space-around; align-items:center">

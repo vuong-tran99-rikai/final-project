@@ -1,9 +1,9 @@
 <h1>Doanh thu</h1>
 
-<%= form_tag revenue_invoices_path, method: :get, class: "search-form" do %>
-  <%= label_tag :search_date, "Tìm kiếm theo ngày:", style: "color: black; font-weight: bold;" %>
-  <%= date_field_tag :search_date, params[:search_date], class: "form-control" %>
-  <%= submit_tag "Tìm kiếm", class: "btn btn-primary", style: "margin: 10px 0;" %>
+<%= form_tag revenue_admin_invoices_path, method: :get, class: "search-form" do %>
+  <%= label_tag :search_month, "Tìm kiếm theo tháng:" %>
+  <%= month_field_tag :search_month, params[:search_month], class: "form-control" %>
+  <%= submit_tag "Tìm kiếm", class: "btn btn-primary" %>
 <% end %>
 
 <p style="color: black;">Tổng doanh thu: <%= number_to_currency(@total_revenue, unit: '₫') %></p>

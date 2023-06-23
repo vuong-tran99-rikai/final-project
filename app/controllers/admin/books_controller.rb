@@ -51,12 +51,12 @@ class Admin::BooksController < ApplicationController
   end
 
   def edit
-    @books = Book.where(status: [0, 1]).find(params[:id])
+    @books = Book.where(status: [0, 1]).find( params[:id])
   end
 
   def update
     @books = Book.find(params[:id])
-    if @books.update(book_params)
+    if @books.update(book_params.merge(status: params[:book][:status].to_i))
       flash[:success] = t('flash.update')
       redirect_to request.referrer
     else

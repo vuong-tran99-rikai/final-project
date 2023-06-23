@@ -19,11 +19,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params.merge!(status: 0, type_account: 0)) # 0: open, 0: customer
     if @user.save 
-      flash[:info] = "User created successfully"
+      flash[:info] = t('flash.create')
       log_in(@user)
       redirect_to @user
     else
-      flash[:error] = "An error has occurred"
+      flash[:error] = t('flash.error')
       render 'new'
     end
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = t('flash.update')
       redirect_to root_url
     else
       render "edit"

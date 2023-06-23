@@ -10,7 +10,7 @@ class EvaluatersController < ApplicationController
     @evaluater = Evaluater.new(evaluater_params)
     @book = Book.find(params[:evaluater][:book_id])
     if @evaluater.save
-      flash[:success] = "Đã thêm mới đánh giá"
+      flash[:success] = t('flash.create')
       redirect_to page_path(@book.id)
     else
       render :new

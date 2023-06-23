@@ -16,7 +16,7 @@
     <ul class="list-unstyled components mb-5">
       <% if logged? %>
         <% if admin_user? %>
-          <li><%= link_to "Dashboards", revenue_invoices_path , style: (get_path.include?("revenue")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Dashboards", revenue_admin_invoices_path , style: (get_path.include?("revenue")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li>
             <%= link_to "Categories", "#categoriesSubmenu", class: "dropdown-toggle", "data-toggle": "collapse", "aria-expanded": "false", style: (get_path.include?("categor")) ? "color: #f8b739;" : "#FFFFFFCC" %>
             <ul class="collapse list-unstyled" id="categoriesSubmenu">
@@ -46,8 +46,8 @@
           <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
           <li><%= link_to "Discount Book", book_discounts_path , style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
            <li><%= link_to "History", invoices_path , style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+          <li><%= link_to "Setting", edit_user_path(current_user), style: (get_path.include?("user") && get_path.include?("edit")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
         <% end %>
-        <li><%= link_to "Setting", edit_user_path(current_user), style: (get_path.include?("user") && get_path.include?("edit")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
       <% else %>
         <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
       <% end %>

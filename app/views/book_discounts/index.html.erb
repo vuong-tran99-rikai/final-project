@@ -11,7 +11,7 @@
   <% @books.each do |book| %>
     <div class="box">
       <% if book.image.present? %>
-        <%= link_to image_tag(book.image.url, class: 'book-image', style: 'width: 70%'), page_path(book) %>
+        <%= link_to image_tag(book.image.url, class: 'img_book_home'), page_path(book) %>
       <% end %>
       <div class="description_book">
         <div><%= book.name_book %></div>
