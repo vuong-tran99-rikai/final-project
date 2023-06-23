@@ -28,9 +28,8 @@
       </div>
     <% end %>
     <div class="convert_i18n">
-      <%= link_to (get_i18n.to_s == 'en') ? "EN" : "VN",
-          locale: (get_i18n.to_s == 'en') ? "vi" : "en"
-      %>
+      <%= link_to "EN", locale: "en" %>
+      <%= link_to "VN", locale: "vi" %>
     </div>
    </div>
 
@@ -55,9 +54,14 @@
 
   .convert_i18n a {
     border-radius: 0.25rem;
+    margin-right: 8px;
     padding: 6px 10px;
     color: white;
     background-color: red;
+  }
+
+  .convert_i18n a:nth-child(1) {
+    background-color: black;
   }
 
   #btn_cart form input{

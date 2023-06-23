@@ -9,9 +9,13 @@
     </ul>
   </nav>
 </div>
+
 <div class="container_grid">
   <% @books.each do |book| %>
     <div class="box">
+      <% if book.quantity < 1 %>
+        <img class="sold_out" width="64" height="64" src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-sold-out-technology-ecommerce-flaticons-flat-flat-icons-2.png" alt="external-sold-out-technology-ecommerce-flaticons-flat-flat-icons-2"/>
+      <% end %>
       <% if book.image.present? %>
         <%= link_to image_tag(book.image.url, class: 'img_book_home'), page_path(book) %>
       <% end %>
@@ -37,6 +41,17 @@
 </div>
 
 <style>
+
+  .box {
+    position: relative;
+  }
+
+  .sold_out {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
   .navbar-nav {
     flex-direction: row-reverse;
   }
