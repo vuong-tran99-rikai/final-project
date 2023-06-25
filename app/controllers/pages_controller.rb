@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @category = Category.where(status: 1)
-    
+    @user = current_user
     if params[:search].present?
       @books = Book.where("LOWER(name_book) LIKE ?", "%#{params[:search].downcase}%")
                    .where(status: 1)

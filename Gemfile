@@ -30,6 +30,7 @@ gem 'bullet', group: 'development'
 gem 'carrierwave'
 # gem 'unidecode'
 gem "rails-i18n"
+gem 'actionmailer', '~> 6.1.4'
 
 
 

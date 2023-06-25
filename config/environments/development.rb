@@ -82,5 +82,17 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
   
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: 'trankimthat2603@gmail.com',
+    password: 'qlhhtxdekiyjfgwn',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+  
+  # Cấu hình email gửi từ địa chỉ nào
+  config.action_mailer.default_options = { from: 'trankimthat2603@gmail.com' }
 
 end
