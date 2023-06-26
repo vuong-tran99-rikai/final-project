@@ -9,9 +9,11 @@ class Category < ApplicationRecord
     private
   
     def unique_name_category_with_status
-      existing_record = Category.where(name_category: name_category, status: [0, 1]).first
+      name_category_without_whitespace = name_category.strip # Loại bỏ không gian trắng từ tên danh mục
+      
+      existing_record = Category.where("TRIM(name_category) = ? AND status IN (0, 1)", name_category_without_whitespace).first
       if existing_record.present? && existing_record != self
-        errors.add(:name_category, "has already been taken with status [0, 1]")
+        errors.add(:name_category, "has already been taken with status")
       end
     end
 end

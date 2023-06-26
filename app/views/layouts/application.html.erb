@@ -38,17 +38,25 @@
     <%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'popper', 'data-turbolinks-track': 'reload' %> 
   </body>
-  <script type="text/javascript">
-      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-      (function(){
-      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-      s1.async=true;
-      s1.src='https://embed.tawk.to/632cfb8437898912e96acab2/1gdjrcvta';
-      s1.charset='UTF-8';
-      s1.setAttribute('crossorigin','*');
-      s0.parentNode.insertBefore(s1,s0);
-      })();
-  </script>
+   <% if logged? %>
+        <% if admin_user? %>
+        <% else %>
+
+      <script type="text/javascript">
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/632cfb8437898912e96acab2/1gdjrcvta';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
+          })();
+      </script>
+      <% end %>
+      <%else%>
+    <%end%>
+
 </html>
 <style>
 
