@@ -28,8 +28,8 @@
       </div>
     <% end %>
     <div class="convert_i18n">
-      <%= link_to "EN", locale: "en" %>
-      <%= link_to "VN", locale: "vi" %>
+      <%= link_to "EN", url_for(locale: 'en'), style: (get_i18n.include?('/en')) ? 'background-color: red' : 'background-color: black' %>
+      <%= link_to "VN", url_for(locale: 'vi'), style: (get_i18n.include?('/vi')) ? 'background-color: red' : 'background-color: black' %>
     </div>
    </div>
 
@@ -57,11 +57,6 @@
     margin-right: 8px;
     padding: 6px 10px;
     color: white;
-    background-color: red;
-  }
-
-  .convert_i18n a:nth-child(1) {
-    background-color: black;
   }
 
   #btn_cart form input{
