@@ -68,7 +68,8 @@ module SessionHelper
   end
 
   def get_i18n
-    I18n.locale
+    path = URI.parse(request.original_url).path
+    return path.slice(0,3)
   end
   
 end
