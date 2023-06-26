@@ -23,7 +23,7 @@
     <tbody>
       <% @invoice.invoice_details.each_with_index do |detail, index| %>
         <tr>
-          <td><%= index %></td>
+          <td><%= index + 1 %></td>
           <td><%= detail.book.name_book %></td>
           <td><%= detail.price %></td>
           <td><%= detail.quantity %></td>
