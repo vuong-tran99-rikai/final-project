@@ -1,12 +1,12 @@
-<h3>Danh sách hóa đơn</h3>
+<h3><%= t('language.list_invoices') %></h3>
 <% if @invoices.empty? %>
   <p>Chưa có hóa đơn nào.</p>
 <% else %>
   <table class="table table-success table-hover">
     <thead>
       <tr>
-        <th>Số hóa đơn</th>
-        <th>Ngày tạo đơn hàng</th>
+        <th>ID</th>
+        <th><%= t('language.create_at') %></th>
         <th>Action</th>
       </tr>
     </thead>
@@ -16,7 +16,7 @@
           <td><%= invoice.id %></td>
           <td><%= invoice.created_at.strftime("%d/%m/%Y") %></td>
           <td style="padding: 8px">
-            <%= button_to 'Xem chi tiết',
+            <%= button_to t('language.info'),
               invoice_path(invoice),
               method: :get,
               class: "btn btn-info",

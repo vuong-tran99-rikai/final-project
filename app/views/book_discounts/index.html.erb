@@ -1,8 +1,8 @@
 <div class="container_search">
   <%= form_with(url: book_discounts_path, method: "get", class: "form-inline") do |form| %>
     <div class="form_search">
-      <%= form.select 'discount_detail[discount_id]', options_from_collection_for_select(@discount, :id, :name_KM), { prompt: 'Chọn khuyến mãi' }, { class: 'custom-select', id: 'inputGroupSelect02' } %>
-      <%= form.submit "Search", class: "btn btn-primary" %>
+      <%= form.select 'discount_detail[discount_id]', options_from_collection_for_select(@discount, :id, :name_KM), { prompt: t('language.select_discount') }, { class: 'custom-select', id: 'inputGroupSelect02' } %>
+      <%= form.submit t('language.search'), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
@@ -15,7 +15,7 @@
       <% end %>
       <div class="description_book">
         <div class="book_name"><%= book.name_book %></div>
-        <div class="book_author">Tác giả: <%= book.author %></div>
+        <div class="book_author"><%= t('language.author') %>: <%= book.author %></div>
         <div class="price_info">
           <div>Giá: </div>
           <div class="price_discount"><%= book.display_price[:discount] %></div>

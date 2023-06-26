@@ -2,15 +2,15 @@
   <div>
     <%= render 'shared/error_messages', object: f.object %>
   </div>
-  <%= f.label :name %>
+  <%= f.label t('language.name') %>
   <%= f.text_field :name, class: 'form-control' %>
-  <%= f.label :email %>
+  <%= f.label t('language.email') %>
   <%= f.email_field :email, class: 'form-control' %>
-  <%= f.label :image %>
+  <%= f.label t('language.image') %>
   <%= f.file_field :image, class: 'form-control' %>
-  <%= f.label :password %>
+  <%= f.label t('language.password') %>
   <%= f.password_field :password, class: 'form-control' %>
-  <%= f.label :password_confirmation, "Confirmation" %>
+  <%= f.label t('language.confirmation') %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   <%= f.submit yield(:button_text), class: "btn btn-primary", style: "margin-top: 10px" %>
 <% end %>

@@ -11,17 +11,17 @@
       <div class="detail_name"><%= @book.name_book %></div>
       <div class="detail_id">ID: <%= @book.id %></div>
       <div class="price_info">
-        <div>Giá: </div>
+        <div><%= t('language.price') %>: </div>
         <div class="price_discount"><%= @book.display_price[:discount] %></div>
         <div class="price_current"><%= @book.display_price[:current] %></div>
         <div>đ</div>
       </div>
-      <div class="detail_title_description">Mô tả:</div>
+      <div class="detail_title_description"><%= t('language.description') %>:</div>
       <div class="detail_description"><%= @book.description %></div>
-      <div class="detail_author">Tác giả: <%= @book.author %></div>
-      <div class="detail_quantity">Số lượng: <%= @book.quantity %></div>
+      <div class="detail_author"><%= t('language.author') %>: <%= @book.author %></div>
+      <div class="detail_quantity"><%= t('language.quantity') %>: <%= @book.quantity %></div>
       <%= number_field :quantity, class: 'form-control' %>
-      <%= button_to "Thêm",
+      <%= button_to t('language.add'),
           add_to_cart_invoices_path(@book.id),
           method: :get,
           disabled: (@book.quantity < 1) ? true : false,
@@ -30,7 +30,7 @@
           style: 'margin-top: 10px'
       %>
       <div class="btn_vote" style="display: flex; margin: 10px 0;">
-        <%= button_to "Đánh giá",
+        <%= button_to t('language.vote'),
           evaluater_path(@book.id),
           method: :get,
           class: "btn_comment",
