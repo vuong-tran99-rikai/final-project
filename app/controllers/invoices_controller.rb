@@ -11,6 +11,7 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(invoice_params.merge!(status: 0))
     @cart = get_cart_from_cookie
+    # byebug
     if @invoice.save
       flash[:info] = t('flash.book')
       cart.each do |item|
@@ -27,6 +28,7 @@ class InvoicesController < ApplicationController
           invoice_detail.save
         end
       end
+      UserMailer.welcome_email(@invoice).deliver_now
       set_cart_cookie([])
       redirect_to root_url
     else
@@ -35,16 +37,16 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def index
-    @invoices = current_user.invoices
-  end
+  # def index
+  #   @invoices = current_user.invoices
+  # end
 
-  def show
-    @invoice = Invoice.find(params[:id])
-  end
-  def purchase_history
-    @purchase_histories = Invoice.where(user_id: current_user.id)
-  end
+  # def show
+  #   @invoice = Invoice.find(params[:id])
+  # end
+  # def purchase_history
+  #   @purchase_histories = Invoice.where(user_id: current_user.id)
+  # end
 
   def add_to_cart
     book_id = params[:book_id]
@@ -115,6 +117,20 @@ class InvoicesController < ApplicationController
     redirect_to cart_invoices_path  
   end
   
+
+
+  def index
+    @invoices = current_user.invoices
+  end
+
+  def show
+    @invoice = Invoice.includes(invoice_details: [:book]).find(params[:id])
+
+  end
+  def purchase_history
+    @purchase_histories = Invoice.where(user_id: current_user.id)
+  end
+
   private
 
   def calculate_total_revenue(invoices)

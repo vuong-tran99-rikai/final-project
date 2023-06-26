@@ -21,7 +21,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @invoice.invoice_details.each.with_index(1) do |detail, index| %>
+      <% @invoice.invoice_details.each_with_index do |detail, index| %>
         <tr>
           <td><%= index %></td>
           <td><%= detail.book.name_book %></td>

@@ -36,46 +36,27 @@
     <%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'main', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'popper', 'data-turbolinks-track': 'reload' %>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var button = document.getElementById('my-button');
-        button.addEventListener('click', function() {
-          // Xử lý sự kiện onclick tại đây
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        });
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var sidebar = document.getElementById('sidebar');
-        var button = document.getElementById('sidebarCollapse');
-        button.addEventListener('click', function() {
-          var content = document.getElementsByClassName('container_content')[0]
-          var header_content = document.getElementsByClassName('header_nav')[0]
-          if (content.style.width == '98.9vw') {
-            var width = window.innerWidth - 315;
-            content.style.width = width + 'px';
-            header_content.style.width = width + 'px';
-          } else {
-            content.style.width = '98.9vw';
-            header_content.style.width = '100vw';
-          }
-        });
-      });
-
-      window.addEventListener('scroll', function() {
-        var button = document.getElementById('my-button');
-        if (window.scrollY >= 600) {
-          button.style.display = 'flex'
-        } else {
-          button.style.display = 'none'
-        }
-      });
-    </script>
+    <%= javascript_include_tag 'popper', 'data-turbolinks-track': 'reload' %> 
   </body>
+   <% if logged? %>
+        <% if admin_user? %>
+        <% else %>
+
+      <script type="text/javascript">
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/632cfb8437898912e96acab2/1gdjrcvta';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
+          })();
+      </script>
+      <% end %>
+      <%else%>
+    <%end%>
+
 </html>
 <style>
 
