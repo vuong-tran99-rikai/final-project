@@ -7,12 +7,12 @@
       <table class="table table-success table-hover">
         <thead>
           <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Ảnh</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Số lượng</th>
-            <th scope="col">Đơn giá</th>
-            <th scope="col">Thành tiền</th>
+            <th scope="col"><%= t('language.number_order') %></th>
+            <th scope="col"><%= t('language.image') %></th>
+            <th scope="col"><%= t('language.name_book') %></th>
+            <th scope="col"><%= t('language.quantity') %></th>
+            <th scope="col"><%= t('language.price') %></th>
+            <th scope="col"><%= t('language.into_money') %></th>
             <th></th>
           </tr>
         </thead>
@@ -66,14 +66,14 @@
         </tbody>
       </table>
       <div class="text-right">
-        <div class="total-price"><strong>Tạm tính giỏ hàng: <%= calculate_total_current(@cart) %> ₫</strong></div>
-        <div class="total-price"><strong>Tiết kiệm được: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
-        <div class="total-price"><strong>Thành tiền: <%= calculate_total(@cart) %> ₫</strong></div>
+        <div class="total-price"><strong><%= t('language.calculating_cart') %>: <%= calculate_total_current(@cart) %> ₫</strong></div>
+        <div class="total-price"><strong><%= t('language.savings') %>: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
+        <div class="total-price"><strong><%= t('language.into_money') %>: <%= calculate_total(@cart) %> ₫</strong></div>
         <div class="btn_pay">
           <%= button_to "Thanh toán",
             new_invoice_path,
             method: :get,
-            class: "btn btn-danger",
+            class: 'btn btn-danger',
             remote: true
           %>
         </div>

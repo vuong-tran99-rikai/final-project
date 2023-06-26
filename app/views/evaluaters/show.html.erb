@@ -1,5 +1,5 @@
 <% provide(:title, 'Đánh giá sách') %>
-<h1>Đánh giá sách</h1>
+<h1><%= t('language.book_review') %></h1>
 <div class="row" style="justify-content: center; color: black;">
   <div class="col-md-6 col-md-offset-3">  
     <%= form_for(@evaluater) do |form| %>
@@ -10,7 +10,7 @@
       </div>
       <div class="evaluater_book_name"><%= @book.name_book %></div>
       <%= form.hidden_field :book_id, value: @book.id %>
-      <%= form.label :level %>
+      <%= form.label t('language.level') %>
       <!-- <%= form.select :level, options_for_select((1..5).map { |i| ["#{i} sao", i] }) %> -->
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="evaluater[level]">
         <option value="1">1 Star</option>
@@ -25,12 +25,12 @@
         </div>
       <% end %>
       
-      <%= form.label :comment %>
+      <%= form.label t('language.comment')  %>
       <%= form.text_area :comment, class: 'form-control' %>
       <%= @evaluater.errors[:comment].first %>
       <%= form.hidden_field :user_id, value: current_user.id %>
 
-      <%= form.submit 'Đánh giá sách', class: "btn btn-primary", style: 'margin-top: 10px' %>
+      <%= form.submit t('language.evaluate'), class: "btn btn-primary", style: 'margin-top: 10px' %>
     <% end %>
   </div>
 </div>
