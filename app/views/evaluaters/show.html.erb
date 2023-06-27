@@ -13,11 +13,11 @@
       <%= form.label t('language.level') %>
       <!-- <%= form.select :level, options_for_select((1..5).map { |i| ["#{i} sao", i] }) %> -->
       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="evaluater[level]">
-        <option value="1">1 Star</option>
-        <option value="2">2 Star</option>
-        <option value="3">3 Star</option>
-        <option value="4">4 Star</option>
-        <option value="5">5 Star</option>
+        <option value="1">1 <%= t('language.star') %></option>
+        <option value="2">2 <%= t('language.star') %></option>
+        <option value="3">3 <%= t('language.star') %></option>
+        <option value="4">4 <%= t('language.star') %></option>
+        <option value="5">5 <%= t('language.star') %></option>
       </select>
       <% if @evaluater.errors.has_key?(:level) %>
         <div class="error">
