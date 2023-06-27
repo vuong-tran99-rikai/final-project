@@ -2,23 +2,23 @@
   <div>
     <%= render 'shared/error_messages', object: f.object %>
   </div>
-  <%= f.label 'Địa chỉ giao hàng:', class: 'title_pay' %>
-  <%= f.label 'Họ tên người nhận:' %>
+  <%= f.label t('language.delivery_address') + ":", class: 'title_pay' %>
+  <%= f.label t('language.consignees_name') + ":" %>
   <%= f.text_field :name, class: 'form-control', value: current_user.name, readonly: true %>
-  <%= f.label 'Số điện thoại:' %>
+  <%= f.label t('language.phone') + ":" %>
   <%= f.telephone_field :phone, class: 'form-control' %>
-  <%= f.label 'Địa chỉ:' %>
+  <%= f.label t('language.address') + ":" %>
   <%= f.text_field :address, class: 'form-control' %>
-  <%= f.label 'Ngày trả:' %>
+  <%= f.label t('language.pay_day') + ":" %>
   <%= f.date_field :expiry_date, class: 'form-control' %>
   <div class="text-right">
-    <div class="total-price"><strong>Khuyến mãi: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
-    <div class="total-price"><strong>Tổng tiền thuê: <%= calculate_total(@cart) %> ₫</strong></div>
+    <div class="total-price"><strong><%= t('language.discount') %>: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
+    <div class="total-price"><strong><%= t('language.total_rent') %>: <%= calculate_total(@cart) %> ₫</strong></div>
   </div>
   <%= f.hidden_field :total_discount, value: calculate_total_current(@cart) - calculate_total(@cart) %>
   <%= f.hidden_field :total_price, value: calculate_total(@cart) %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.submit 'Xác nhận thuê sách', class: "btn btn-danger" %>
+  <%= f.submit t('language.rental_confirmation'), class: "btn btn-danger" %>
 <% end %>
 
 <style>
@@ -32,9 +32,6 @@
     line-height: 32px;
   }
   label {
-    margin-bottom: 10px;
-  }
-  .form-control {
     margin-bottom: 10px;
   }
 

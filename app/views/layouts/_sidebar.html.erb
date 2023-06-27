@@ -42,7 +42,8 @@
           <li><%= link_to t('language.setting'), edit_user_path(current_user), style: (get_path.include?("user") && get_path.include?("edit")) ? "color: #f8b739;" : "#FFFFFFCC" %></li>
         <% end %>
       <% else %>
-        <li><%= link_to "Home", root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+        <li><%= link_to t('language.home'), root_url, style: (get_path == '/') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
+        <li><%= link_to t('language.book_discounts'), book_discounts_path , style: (get_path == '/book_discounts') ? "color: #f8b739;" : "#FFFFFFCC" %></li>
       <% end %>
     </ul>
   </div>

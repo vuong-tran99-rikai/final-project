@@ -70,7 +70,7 @@
         <div class="total-price"><strong><%= t('language.savings') %>: -<%= calculate_total_current(@cart) - calculate_total(@cart) %> ₫</strong></div>
         <div class="total-price"><strong><%= t('language.into_money') %>: <%= calculate_total(@cart) %> ₫</strong></div>
         <div class="btn_pay">
-          <%= button_to "Thanh toán",
+          <%= button_to t('language.pay'),
             new_invoice_path,
             method: :get,
             class: 'btn btn-danger',

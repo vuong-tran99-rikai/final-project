@@ -17,13 +17,13 @@
         <div class="book_name"><%= book.name_book %></div>
         <div class="book_author"><%= t('language.author') %>: <%= book.author %></div>
         <div class="price_info">
-          <div>Giá: </div>
+          <div><%= t('language.price') %>: </div>
           <div class="price_discount"><%= book.display_price[:discount] %></div>
           <div class="price_current"><%= book.display_price[:current] %></div>
           <div>đ</div>
         </div>
       </div>
-      <%= button_to "Thêm",
+      <%= button_to t('language.add'),
         add_to_cart_invoices_path(book_id: book.id),
         method: :get,
         disabled: (book.quantity < 1) ? true : false,
