@@ -1,34 +1,30 @@
 <h3>Doanh thu</h3>
 
-<%= form_with(url: revenue_admin_invoices_path, method: :get, class: "search-form", style: "display: inline-block") do |f| %>
+<%= form_tag revenue_admin_invoices_path, method: :get, class: "search-form", style: "display: inline-block" do %>
   <%= label_tag :search_month, "Tìm kiếm theo tháng:", style: "color: black; font-weight: bold;" %>
   <div style="display: flex; margin-bottom: 10px;">
-    <div style="display: flex;">
-      <%= f.month_field :search_month, class: "form-control", style: "display: flex", value: params[:search_month] %>
-    </div>
-    <div style="display: flex;">
-      <%= f.submit "Tìm kiếm", class: "btn btn-success", style: "margin: 0 0 0 8px;" %>
-    </div>
+    <%= month_field_tag :search_date, params[:search_month], class: "form-control", style: "display: flex" %>
+    <%= submit_tag "Tìm kiếm", class: "btn btn-success", style: "margin: 0 0 0 8px;" %>
   </div>
 <% end %>
 
 <p style="color: black;">Tổng doanh thu: <%= number_to_currency(@total_revenue, unit: '₫') %></p>
 
 <table class="table table-success table-hover">
-<thead>
-  <tr>
-    <th>Hóa đơn</th>
-    <th>Tên người mua</th>
-    <th>Tổng tiền</th>
-  </tr>
-</thead>
-<tbody>
-  <% @invoices.each do |invoice| %>
+  <thead>
     <tr>
-      <td><%= invoice.id %></td>
-      <td><%= invoice.user&.name || "Unknown" %></td>
-      <td><%= number_to_currency(invoice.total_price, unit: '₫') %></td>
+      <th>Hóa đơn</th>
+      <th>Tên người mua</th>
+      <th>Tổng tiền</th>
     </tr>
-  <% end %>
-</tbody>
+  </thead>
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.id %></td>
+      <td><%= invoice.user&.name || "Unknown" %></td>
+        <td><%= number_to_currency(invoice.total_price, unit: '₫') %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

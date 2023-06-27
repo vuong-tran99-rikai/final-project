@@ -56,7 +56,7 @@ vi:
     discount: "Khuyến mãi"
     total_rent: "Tổng tiền thuê"
     rental_confirmation: "Xác nhận thuê sách"
-    login: "Đăng nhập"
+    # login: "Đăng nhập"
     register: "Đăng ký"
     signup_now: "Đăng ký ngay"
     new_user: "Tài khoản mới"

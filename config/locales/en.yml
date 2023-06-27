@@ -86,7 +86,7 @@ en:
     discount: "Discount"
     total_rent: "Total rent"
     rental_confirmation: "Rental Confirmation"
-    login: "Login"
+    # login: "Login"
     register: "Register"
     signup_now: "Sign Up Now"
     new_user: "New user"
